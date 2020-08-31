@@ -14,10 +14,19 @@ class RecipeCardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        if let title = self.navigationTitle
+        {
+            self.navigationItem.title = title
+        }
+        
+        let reloadBarButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(reloadCard))
+        self.navigationItem.rightBarButtonItem = reloadBarButton
     }
     
+    @objc func reloadCard(){
+
+    }
 
     /*
     // MARK: - Navigation
