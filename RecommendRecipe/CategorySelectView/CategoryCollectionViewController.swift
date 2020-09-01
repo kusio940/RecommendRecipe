@@ -12,7 +12,28 @@ private let reuseIdentifier = "Cell"
 
 class CategoryCollectionViewController: UICollectionViewController {
 
-    let cellSideLength:CGFloat = UIScreen.main.bounds.size.width  / 2.0 - 7.5
+    enum CategoryType:Int{
+        case meat
+        case fish
+        case egg
+        case tofu
+        case rice
+        case powder
+        case noodle
+        case bread
+        case soup
+        case casserole
+        case vegetable
+        case salad
+        case sweets
+        case fruit
+        case overseasCuisine
+        case bento
+    }
+    
+    let sizeRatio:CGFloat = 0.5
+    let cellSizeMergin: CGFloat = 7.5
+    var cellSideLength:CGFloat!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,18 +42,23 @@ class CategoryCollectionViewController: UICollectionViewController {
         
         self.navigationItem.title = R.string.titleWord.categoryCollectionViewController()
         
-        // レイアウト設定
-        let cellLayout = UICollectionViewFlowLayout()
-        cellLayout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        cellLayout.minimumInteritemSpacing = 0
-        cellLayout.minimumLineSpacing = 5
-        cellLayout.itemSize = CGSize(width: cellSideLength, height: cellSideLength)
-        collectionView.collectionViewLayout = cellLayout
+        self.cellSideLength = UIScreen.main.bounds.size.width  * sizeRatio - cellSizeMergin
+        self.setCellLayout()
 
     }
 
     override func viewWillAppear(_ animated: Bool) {
         self.collectionView.isUserInteractionEnabled = true
+    }
+    
+    func setCellLayout(){
+        // レイアウト設定
+        let cellLayout = UICollectionViewFlowLayout()
+        cellLayout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        cellLayout.minimumInteritemSpacing = 0
+        cellLayout.minimumLineSpacing = 5
+        cellLayout.itemSize = CGSize(width: self.cellSideLength, height: self.cellSideLength)
+        collectionView.collectionViewLayout = cellLayout
     }
     
     // MARK: UICollectionViewDataSource
@@ -56,50 +82,66 @@ class CategoryCollectionViewController: UICollectionViewController {
         var categoryName:String!
 
         switch indexPath.row {
-        case 0:
+        case CategoryType.meat.rawValue:
             categoryName = R.string.categoryType.meat()
-        case 1:
+            
+        case CategoryType.fish.rawValue:
             categoryName = R.string.categoryType.fish()
-        case 2:
+            
+        case CategoryType.egg.rawValue:
             categoryName = R.string.categoryType.egg()
-        case 3:
+            
+        case CategoryType.tofu.rawValue:
             categoryName = R.string.categoryType.tofu()
-        case 4:
+            
+        case CategoryType.rice.rawValue:
             categoryName = R.string.categoryType.rice()
-        case 5:
+            
+        case CategoryType.powder.rawValue:
             categoryName = R.string.categoryType.powder()
-        case 6:
+            
+        case CategoryType.noodle.rawValue:
             categoryName = R.string.categoryType.noodle()
-        case 7:
+            
+        case CategoryType.bread.rawValue:
             categoryName = R.string.categoryType.bread()
-        case 8:
+            
+        case CategoryType.soup.rawValue:
             categoryName = R.string.categoryType.soup()
-        case 9:
+            
+        case CategoryType.casserole.rawValue:
             categoryName = R.string.categoryType.casserole()
-        case 10:
+            
+        case CategoryType.vegetable.rawValue:
             categoryName = R.string.categoryType.vegetable()
-        case 11:
+            
+        case CategoryType.salad.rawValue:
             categoryName = R.string.categoryType.salad()
-        case 12:
+            
+        case CategoryType.sweets.rawValue:
             categoryName = R.string.categoryType.sweets()
-        case 13:
+            
+        case CategoryType.fruit.rawValue:
             categoryName = R.string.categoryType.fruit()
-        case 14:
+            
+        case CategoryType.overseasCuisine.rawValue:
             categoryName = R.string.categoryType.overseasCuisine()
-        case 15:
+            
+        case CategoryType.bento.rawValue:
             categoryName = R.string.categoryType.bento()
+            
         default:
             break
         }
 
         let image = UIImage(named: categoryName)
         let imageView = UIImageView(image: image)
-        imageView.frame = CGRect(x:0, y:0, width:cellSideLength, height:cellSideLength)
+        imageView.frame = CGRect(x:0, y:0, width:self.cellSideLength, height:self.cellSideLength)
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         cell.contentView.addSubview(imageView)
         
-        let labelBackground = UIView.init(frame: CGRect.init(x: 0, y: cell.frame.height - 35, width: cellSideLength, height: 24))
+        let labelBackground = UIView.init(frame: CGRect.init(x: 0, y: cell.frame.height - 35, width: self.cellSideLength, height: 24))
         labelBackground.backgroundColor = .white
         labelBackground.alpha = 0.7
         cell.contentView.addSubview(labelBackground)
@@ -123,38 +165,54 @@ class CategoryCollectionViewController: UICollectionViewController {
         var categoryName:String!
 
         switch indexPath.row {
-        case 0:
+        case CategoryType.meat.rawValue:
             categoryName = R.string.categoryType.meat()
-        case 1:
+            
+        case CategoryType.fish.rawValue:
             categoryName = R.string.categoryType.fish()
-        case 2:
+            
+        case CategoryType.egg.rawValue:
             categoryName = R.string.categoryType.egg()
-        case 3:
+            
+        case CategoryType.tofu.rawValue:
             categoryName = R.string.categoryType.tofu()
-        case 4:
+            
+        case CategoryType.rice.rawValue:
             categoryName = R.string.categoryType.rice()
-        case 5:
+            
+        case CategoryType.powder.rawValue:
             categoryName = R.string.categoryType.powder()
-        case 6:
+            
+        case CategoryType.noodle.rawValue:
             categoryName = R.string.categoryType.noodle()
-        case 7:
+            
+        case CategoryType.bread.rawValue:
             categoryName = R.string.categoryType.bread()
-        case 8:
+            
+        case CategoryType.soup.rawValue:
             categoryName = R.string.categoryType.soup()
-        case 9:
+            
+        case CategoryType.casserole.rawValue:
             categoryName = R.string.categoryType.casserole()
-        case 10:
+            
+        case CategoryType.vegetable.rawValue:
             categoryName = R.string.categoryType.vegetable()
-        case 11:
+            
+        case CategoryType.salad.rawValue:
             categoryName = R.string.categoryType.salad()
-        case 12:
+            
+        case CategoryType.sweets.rawValue:
             categoryName = R.string.categoryType.sweets()
-        case 13:
+            
+        case CategoryType.fruit.rawValue:
             categoryName = R.string.categoryType.fruit()
-        case 14:
+            
+        case CategoryType.overseasCuisine.rawValue:
             categoryName = R.string.categoryType.overseasCuisine()
-        case 15:
+            
+        case CategoryType.bento.rawValue:
             categoryName = R.string.categoryType.bento()
+            
         default:
             break
         }
