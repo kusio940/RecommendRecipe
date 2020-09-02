@@ -31,8 +31,7 @@ class CategoryCollectionViewController: UICollectionViewController {
         case bento
     }
     
-    let sizeRatio:CGFloat = 0.5
-    let cellSizeMergin: CGFloat = 7.5
+    let categoryTypeCount:Int = 16
     var cellSideLength:CGFloat!
     
     override func viewDidLoad() {
@@ -42,6 +41,8 @@ class CategoryCollectionViewController: UICollectionViewController {
         
         self.navigationItem.title = R.string.titleWord.categoryCollectionViewController()
         
+        let sizeRatio:CGFloat = 0.5
+        let cellSizeMergin: CGFloat = 7.5
         self.cellSideLength = UIScreen.main.bounds.size.width  * sizeRatio - cellSizeMergin
         self.setCellLayout()
 
@@ -51,14 +52,60 @@ class CategoryCollectionViewController: UICollectionViewController {
         self.collectionView.isUserInteractionEnabled = true
     }
     
-    func setCellLayout(){
-        // レイアウト設定
+    func setCellLayout() {
+        let cellEdgeMergin:CGFloat = 5.0
+        let cellMinimumInteritemSpacing:CGFloat = 0
+        let cellMinimumLineSpacing:CGFloat = 5.0
+        
         let cellLayout = UICollectionViewFlowLayout()
-        cellLayout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        cellLayout.minimumInteritemSpacing = 0
-        cellLayout.minimumLineSpacing = 5
+        cellLayout.sectionInset = UIEdgeInsets(top: cellEdgeMergin, left: cellEdgeMergin, bottom: cellEdgeMergin, right: cellEdgeMergin)
+        cellLayout.minimumInteritemSpacing = cellMinimumInteritemSpacing
+        cellLayout.minimumLineSpacing = cellMinimumLineSpacing
         cellLayout.itemSize = CGSize(width: self.cellSideLength, height: self.cellSideLength)
         collectionView.collectionViewLayout = cellLayout
+    }
+    
+    func createCategoryImageView(imageName: String)-> UIImageView {
+        let image = UIImage(named: imageName)
+        let imageView = UIImageView(image: image)
+        
+        imageView.frame = CGRect(x:0, y:0, width:self.cellSideLength, height:self.cellSideLength)
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        
+        return imageView
+    }
+    
+    func createtLabelBackground(parentView: UIView) -> UIView{
+        let yAxisMargin:CGFloat = 35
+        let viewHeight:CGFloat = 24
+        let alphaValue:CGFloat = 0.7
+        
+        let labelBackground = UIView.init(frame: CGRect.init(x: 0,
+                                                             y: parentView.frame.height - yAxisMargin,
+                                                             width: self.cellSideLength,
+                                                             height: viewHeight))
+        labelBackground.backgroundColor = .white
+        labelBackground.alpha = alphaValue
+        
+        return labelBackground
+    }
+    
+    func createCategoryLabel(parentView: UIView, labelText: String) -> UILabel{
+        let xAxisMargin:CGFloat = 10
+        let yAxisMargin:CGFloat = 35
+        let labelwidthMargin:CGFloat = 20
+        let labelHeight:CGFloat = 24
+        
+        let categoryLabel = UILabel(frame: CGRect(x: xAxisMargin,
+                                                  y: parentView.frame.height - yAxisMargin,
+                                                  width: parentView.frame.width - labelwidthMargin,
+                                                  height: labelHeight))
+        categoryLabel.font =  UIFont.systemFont(ofSize: 24)
+        categoryLabel.text = labelText
+        categoryLabel.textColor = UIColor.black
+        
+        return categoryLabel
     }
     
     // MARK: UICollectionViewDataSource
@@ -69,7 +116,7 @@ class CategoryCollectionViewController: UICollectionViewController {
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 16
+        return categoryTypeCount
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -82,9 +129,10 @@ class CategoryCollectionViewController: UICollectionViewController {
         var categoryName:String!
 
         switch indexPath.row {
+            
         case CategoryType.meat.rawValue:
             categoryName = R.string.categoryType.meat()
-            
+
         case CategoryType.fish.rawValue:
             categoryName = R.string.categoryType.fish()
             
@@ -132,25 +180,12 @@ class CategoryCollectionViewController: UICollectionViewController {
             
         default:
             break
+            
         }
-
-        let image = UIImage(named: categoryName)
-        let imageView = UIImageView(image: image)
-        imageView.frame = CGRect(x:0, y:0, width:self.cellSideLength, height:self.cellSideLength)
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        cell.contentView.addSubview(imageView)
         
-        let labelBackground = UIView.init(frame: CGRect.init(x: 0, y: cell.frame.height - 35, width: self.cellSideLength, height: 24))
-        labelBackground.backgroundColor = .white
-        labelBackground.alpha = 0.7
-        cell.contentView.addSubview(labelBackground)
-        
-        let categoryLabel = UILabel(frame: CGRect(x: 10, y: cell.frame.height - 35, width: cell.frame.width - 20, height: 24))
-        categoryLabel.font =  UIFont.systemFont(ofSize: 24)
-        categoryLabel.text = categoryName
-        categoryLabel.textColor = UIColor.black
-        cell.contentView.addSubview(categoryLabel)
+        cell.contentView.addSubview(self.createCategoryImageView(imageName: categoryName))
+        cell.contentView.addSubview(self.createtLabelBackground(parentView: cell))
+        cell.contentView.addSubview(self.createCategoryLabel(parentView: cell, labelText: categoryName))
         
         return cell
     }
@@ -165,6 +200,7 @@ class CategoryCollectionViewController: UICollectionViewController {
         var categoryName:String!
 
         switch indexPath.row {
+            
         case CategoryType.meat.rawValue:
             categoryName = R.string.categoryType.meat()
             
@@ -215,6 +251,7 @@ class CategoryCollectionViewController: UICollectionViewController {
             
         default:
             break
+            
         }
         
         nextViewController.navigationTitle = categoryName
