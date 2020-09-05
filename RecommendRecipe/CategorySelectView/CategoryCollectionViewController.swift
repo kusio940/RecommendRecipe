@@ -12,7 +12,7 @@ private let reuseIdentifier = "Cell"
 
 class CategoryCollectionViewController: UICollectionViewController {
 
-    enum CategoryType:Int{
+    enum CategoryType: Int{
         case meat
         case fish
         case egg
@@ -29,6 +29,27 @@ class CategoryCollectionViewController: UICollectionViewController {
         case fruit
         case overseasCuisine
         case bento
+        
+        var name: String {
+            switch self {
+            case .meat:            return R.string.categoryType.meat()
+            case .fish:            return R.string.categoryType.fish()
+            case .egg:             return R.string.categoryType.egg()
+            case .tofu:            return R.string.categoryType.tofu()
+            case .rice:            return R.string.categoryType.rice()
+            case .powder:          return R.string.categoryType.powder()
+            case .noodle:          return R.string.categoryType.noodle()
+            case .bread:           return R.string.categoryType.bread()
+            case .soup:            return R.string.categoryType.soup()
+            case .casserole:       return R.string.categoryType.casserole()
+            case .vegetable:       return R.string.categoryType.vegetable()
+            case .salad:           return R.string.categoryType.salad()
+            case .sweets:          return R.string.categoryType.sweets()
+            case .fruit:           return R.string.categoryType.fruit()
+            case .overseasCuisine: return R.string.categoryType.overseasCuisine()
+            case .bento:           return R.string.categoryType.bento()
+            }
+        }
     }
     
     let categoryTypeCount:Int = 16
@@ -37,7 +58,8 @@ class CategoryCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        guard let collectionView = self.collectionView else { return }
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
         self.navigationItem.title = R.string.titleWord.categoryCollectionViewController()
         
@@ -69,7 +91,7 @@ class CategoryCollectionViewController: UICollectionViewController {
         let image = UIImage(named: imageName)
         let imageView = UIImageView(image: image)
         
-        imageView.frame = CGRect(x:0, y:0, width:self.cellSideLength, height:self.cellSideLength)
+        imageView.frame = CGRect(x:.zero, y:.zero, width:self.cellSideLength, height:self.cellSideLength)
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         
@@ -81,7 +103,7 @@ class CategoryCollectionViewController: UICollectionViewController {
         let viewHeight:CGFloat = 24
         let alphaValue:CGFloat = 0.7
         
-        let labelBackground = UIView.init(frame: CGRect.init(x: 0,
+        let labelBackground = UIView.init(frame: CGRect.init(x: .zero,
                                                              y: parentView.frame.height - yAxisMargin,
                                                              width: self.cellSideLength,
                                                              height: viewHeight))
@@ -122,67 +144,13 @@ class CategoryCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         
-        cell.contentView.subviews.forEach {
-            $0.removeFromSuperview()
+        cell.contentView.subviews.forEach { childView in
+            childView.removeFromSuperview()
         }
     
-        var categoryName:String!
-
-        switch indexPath.row {
-            
-        case CategoryType.meat.rawValue:
-            categoryName = R.string.categoryType.meat()
-
-        case CategoryType.fish.rawValue:
-            categoryName = R.string.categoryType.fish()
-            
-        case CategoryType.egg.rawValue:
-            categoryName = R.string.categoryType.egg()
-            
-        case CategoryType.tofu.rawValue:
-            categoryName = R.string.categoryType.tofu()
-            
-        case CategoryType.rice.rawValue:
-            categoryName = R.string.categoryType.rice()
-            
-        case CategoryType.powder.rawValue:
-            categoryName = R.string.categoryType.powder()
-            
-        case CategoryType.noodle.rawValue:
-            categoryName = R.string.categoryType.noodle()
-            
-        case CategoryType.bread.rawValue:
-            categoryName = R.string.categoryType.bread()
-            
-        case CategoryType.soup.rawValue:
-            categoryName = R.string.categoryType.soup()
-            
-        case CategoryType.casserole.rawValue:
-            categoryName = R.string.categoryType.casserole()
-            
-        case CategoryType.vegetable.rawValue:
-            categoryName = R.string.categoryType.vegetable()
-            
-        case CategoryType.salad.rawValue:
-            categoryName = R.string.categoryType.salad()
-            
-        case CategoryType.sweets.rawValue:
-            categoryName = R.string.categoryType.sweets()
-            
-        case CategoryType.fruit.rawValue:
-            categoryName = R.string.categoryType.fruit()
-            
-        case CategoryType.overseasCuisine.rawValue:
-            categoryName = R.string.categoryType.overseasCuisine()
-            
-        case CategoryType.bento.rawValue:
-            categoryName = R.string.categoryType.bento()
-            
-        default:
-            break
-            
-        }
+        let optionalCategoryName = CategoryType(rawValue: indexPath.row)?.name
         
+        guard let categoryName = optionalCategoryName else { return cell }
         cell.contentView.addSubview(self.createCategoryImageView(imageName: categoryName))
         cell.contentView.addSubview(self.createtLabelBackground(parentView: cell))
         cell.contentView.addSubview(self.createCategoryLabel(parentView: cell, labelText: categoryName))
@@ -197,63 +165,9 @@ class CategoryCollectionViewController: UICollectionViewController {
         self.collectionView.isUserInteractionEnabled = false
         let nextViewController = UIStoryboard(name: "RecipeCardView", bundle: nil).instantiateViewController(withIdentifier: "RecipeCardView") as! RecipeCardViewController
         
-        var categoryName:String!
-
-        switch indexPath.row {
-            
-        case CategoryType.meat.rawValue:
-            categoryName = R.string.categoryType.meat()
-            
-        case CategoryType.fish.rawValue:
-            categoryName = R.string.categoryType.fish()
-            
-        case CategoryType.egg.rawValue:
-            categoryName = R.string.categoryType.egg()
-            
-        case CategoryType.tofu.rawValue:
-            categoryName = R.string.categoryType.tofu()
-            
-        case CategoryType.rice.rawValue:
-            categoryName = R.string.categoryType.rice()
-            
-        case CategoryType.powder.rawValue:
-            categoryName = R.string.categoryType.powder()
-            
-        case CategoryType.noodle.rawValue:
-            categoryName = R.string.categoryType.noodle()
-            
-        case CategoryType.bread.rawValue:
-            categoryName = R.string.categoryType.bread()
-            
-        case CategoryType.soup.rawValue:
-            categoryName = R.string.categoryType.soup()
-            
-        case CategoryType.casserole.rawValue:
-            categoryName = R.string.categoryType.casserole()
-            
-        case CategoryType.vegetable.rawValue:
-            categoryName = R.string.categoryType.vegetable()
-            
-        case CategoryType.salad.rawValue:
-            categoryName = R.string.categoryType.salad()
-            
-        case CategoryType.sweets.rawValue:
-            categoryName = R.string.categoryType.sweets()
-            
-        case CategoryType.fruit.rawValue:
-            categoryName = R.string.categoryType.fruit()
-            
-        case CategoryType.overseasCuisine.rawValue:
-            categoryName = R.string.categoryType.overseasCuisine()
-            
-        case CategoryType.bento.rawValue:
-            categoryName = R.string.categoryType.bento()
-            
-        default:
-            break
-            
-        }
+        let optionalCategoryName = CategoryType(rawValue: indexPath.row)?.name
         
+        guard let categoryName = optionalCategoryName else { return }
         nextViewController.navigationTitle = categoryName
         self.navigationController?.pushViewController(nextViewController, animated: true)
         
