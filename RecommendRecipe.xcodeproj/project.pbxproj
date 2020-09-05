@@ -3,14 +3,21 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		484DD12354F4774D2FBDD971 /* Pods_RecommendRecipe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E0A35314030A790B25D8BDF /* Pods_RecommendRecipe.framework */; };
 		4C3E776E24F6AE2F00F65255 /* CategoryCollectionView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C3E776D24F6AE2F00F65255 /* CategoryCollectionView.storyboard */; };
 		4C3E777224F6AF1100F65255 /* FavoriteCollectionView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C3E777124F6AF1100F65255 /* FavoriteCollectionView.storyboard */; };
 		4C3E777424F6AF3200F65255 /* HistoryView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C3E777324F6AF3200F65255 /* HistoryView.storyboard */; };
 		4C3E777624F6AF5D00F65255 /* SettingView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C3E777524F6AF5D00F65255 /* SettingView.storyboard */; };
+		4C3E777824F7DB6600F65255 /* CategoryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3E777724F7DB6600F65255 /* CategoryCollectionViewController.swift */; };
+		4C3E777B24F7F05600F65255 /* RecipeCardView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C3E777A24F7F05600F65255 /* RecipeCardView.storyboard */; };
+		4C3E777D24F7F06F00F65255 /* RecipeCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3E777C24F7F06F00F65255 /* RecipeCardViewController.swift */; };
+		4C3E778024F8019400F65255 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3E777F24F8019400F65255 /* R.generated.swift */; };
+		4C3E778224F8020300F65255 /* CategoryType.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C3E778124F8020300F65255 /* CategoryType.strings */; };
+		4C3E778424F8096C00F65255 /* TitleWord.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C3E778324F8096C00F65255 /* TitleWord.strings */; };
 		4CECFCF924F2B157002A60B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CECFCF824F2B157002A60B6 /* AppDelegate.swift */; };
 		4CECFCFB24F2B157002A60B6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CECFCFA24F2B157002A60B6 /* SceneDelegate.swift */; };
 		4CECFCFD24F2B157002A60B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CECFCFC24F2B157002A60B6 /* ViewController.swift */; };
@@ -20,10 +27,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E0A35314030A790B25D8BDF /* Pods_RecommendRecipe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecommendRecipe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4625289C2C088E222F7C2F47 /* Pods-RecommendRecipe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecommendRecipe.release.xcconfig"; path = "Target Support Files/Pods-RecommendRecipe/Pods-RecommendRecipe.release.xcconfig"; sourceTree = "<group>"; };
 		4C3E776D24F6AE2F00F65255 /* CategoryCollectionView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CategoryCollectionView.storyboard; sourceTree = "<group>"; };
 		4C3E777124F6AF1100F65255 /* FavoriteCollectionView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FavoriteCollectionView.storyboard; sourceTree = "<group>"; };
 		4C3E777324F6AF3200F65255 /* HistoryView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HistoryView.storyboard; sourceTree = "<group>"; };
 		4C3E777524F6AF5D00F65255 /* SettingView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingView.storyboard; sourceTree = "<group>"; };
+		4C3E777724F7DB6600F65255 /* CategoryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewController.swift; sourceTree = "<group>"; };
+		4C3E777A24F7F05600F65255 /* RecipeCardView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RecipeCardView.storyboard; sourceTree = "<group>"; };
+		4C3E777C24F7F06F00F65255 /* RecipeCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCardViewController.swift; sourceTree = "<group>"; };
+		4C3E777F24F8019400F65255 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
+		4C3E778124F8020300F65255 /* CategoryType.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = CategoryType.strings; sourceTree = "<group>"; };
+		4C3E778324F8096C00F65255 /* TitleWord.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = TitleWord.strings; sourceTree = "<group>"; };
 		4CECFCF524F2B157002A60B6 /* RecommendRecipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecommendRecipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CECFCF824F2B157002A60B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4CECFCFA24F2B157002A60B6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -32,6 +47,7 @@
 		4CECFD0124F2B158002A60B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4CECFD0424F2B158002A60B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4CECFD0624F2B158002A60B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		516CEEDA1958C7BBB93ECE86 /* Pods-RecommendRecipe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecommendRecipe.debug.xcconfig"; path = "Target Support Files/Pods-RecommendRecipe/Pods-RecommendRecipe.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,12 +55,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				484DD12354F4774D2FBDD971 /* Pods_RecommendRecipe.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05FAD41A22FC5A8E599D6EE5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				516CEEDA1958C7BBB93ECE86 /* Pods-RecommendRecipe.debug.xcconfig */,
+				4625289C2C088E222F7C2F47 /* Pods-RecommendRecipe.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		3DBEA2969CB0E3668084085B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0E0A35314030A790B25D8BDF /* Pods_RecommendRecipe.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		4C3E776B24F6AC2400F65255 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -55,15 +89,29 @@
 		4C3E776C24F6AC3000F65255 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				4C3E777F24F8019400F65255 /* R.generated.swift */,
 				4CECFD0124F2B158002A60B6 /* Assets.xcassets */,
+				4C3E778124F8020300F65255 /* CategoryType.strings */,
+				4C3E778324F8096C00F65255 /* TitleWord.strings */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		4C3E777924F7EFB700F65255 /* RecipeCardView */ = {
+			isa = PBXGroup;
+			children = (
+				4C3E777A24F7F05600F65255 /* RecipeCardView.storyboard */,
+				4C3E777C24F7F06F00F65255 /* RecipeCardViewController.swift */,
+			);
+			path = RecipeCardView;
 			sourceTree = "<group>";
 		};
 		4C7E712424F6A98F00F206F0 /* CategorySelectView */ = {
 			isa = PBXGroup;
 			children = (
 				4C3E776D24F6AE2F00F65255 /* CategoryCollectionView.storyboard */,
+				4C3E777724F7DB6600F65255 /* CategoryCollectionViewController.swift */,
+				4C3E777924F7EFB700F65255 /* RecipeCardView */,
 			);
 			path = CategorySelectView;
 			sourceTree = "<group>";
@@ -97,6 +145,8 @@
 			children = (
 				4CECFCF724F2B157002A60B6 /* RecommendRecipe */,
 				4CECFCF624F2B157002A60B6 /* Products */,
+				05FAD41A22FC5A8E599D6EE5 /* Pods */,
+				3DBEA2969CB0E3668084085B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -134,9 +184,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4CECFD0924F2B158002A60B6 /* Build configuration list for PBXNativeTarget "RecommendRecipe" */;
 			buildPhases = (
+				16527306D9D509B1FC2D466F /* [CP] Check Pods Manifest.lock */,
+				4C3E777E24F7FDB600F65255 /* ShellScript */,
 				4CECFCF124F2B157002A60B6 /* Sources */,
 				4CECFCF224F2B157002A60B6 /* Frameworks */,
 				4CECFCF324F2B157002A60B6 /* Resources */,
+				52FE46036C1C597F60DBB63C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -185,17 +238,82 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C3E778224F8020300F65255 /* CategoryType.strings in Resources */,
+				4C3E778424F8096C00F65255 /* TitleWord.strings in Resources */,
 				4CECFD0524F2B158002A60B6 /* LaunchScreen.storyboard in Resources */,
 				4CECFD0224F2B158002A60B6 /* Assets.xcassets in Resources */,
 				4CECFD0024F2B157002A60B6 /* Main.storyboard in Resources */,
 				4C3E777224F6AF1100F65255 /* FavoriteCollectionView.storyboard in Resources */,
 				4C3E776E24F6AE2F00F65255 /* CategoryCollectionView.storyboard in Resources */,
+				4C3E777B24F7F05600F65255 /* RecipeCardView.storyboard in Resources */,
 				4C3E777424F6AF3200F65255 /* HistoryView.storyboard in Resources */,
 				4C3E777624F6AF5D00F65255 /* SettingView.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		16527306D9D509B1FC2D466F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RecommendRecipe-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4C3E777E24F7FDB600F65255 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"",
+			);
+			inputPaths = (
+				"$TEMP_DIR/rswift-lastrun",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				$SRCROOT/R.generated.swift,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
+		};
+		52FE46036C1C597F60DBB63C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RecommendRecipe/Pods-RecommendRecipe-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RecommendRecipe/Pods-RecommendRecipe-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RecommendRecipe/Pods-RecommendRecipe-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4CECFCF124F2B157002A60B6 /* Sources */ = {
@@ -204,7 +322,10 @@
 			files = (
 				4CECFCFD24F2B157002A60B6 /* ViewController.swift in Sources */,
 				4CECFCF924F2B157002A60B6 /* AppDelegate.swift in Sources */,
+				4C3E777824F7DB6600F65255 /* CategoryCollectionViewController.swift in Sources */,
 				4CECFCFB24F2B157002A60B6 /* SceneDelegate.swift in Sources */,
+				4C3E777D24F7F06F00F65255 /* RecipeCardViewController.swift in Sources */,
+				4C3E778024F8019400F65255 /* R.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +467,7 @@
 		};
 		4CECFD0A24F2B158002A60B6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 516CEEDA1958C7BBB93ECE86 /* Pods-RecommendRecipe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -364,6 +486,7 @@
 		};
 		4CECFD0B24F2B158002A60B6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4625289C2C088E222F7C2F47 /* Pods-RecommendRecipe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

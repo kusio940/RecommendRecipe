@@ -1,0 +1,24 @@
+/* 
+  CategoryType.strings
+  RecommendRecipe
+
+  Created by 宮永祐介 on 2020/08/28.
+  Copyright © 2020 Miyanaga. All rights reserved.
+*/
+
+"meat" = "肉";
+"fish" = "魚";
+"egg" = "卵";
+"tofu" = "豆腐";
+"rice" = "ご飯もの";
+"powder" = "粉物";
+"noodle" = "麺類";
+"bread" = "パン";
+"soup" = "スープ";
+"casserole" = "鍋";
+"vegetable" = "野菜";
+"salad" = "サラダ";
+"sweets" = "スイーツ";
+"fruit" = "果物";
+"overseasCuisine" = "海外料理";
+"bento" = "弁当";
