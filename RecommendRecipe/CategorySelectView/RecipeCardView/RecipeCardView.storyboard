@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,7 +15,45 @@
                     <view key="view" contentMode="scaleToFill" id="wI8-2C-mkQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10/10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="ndi-R4-ugD">
+                                <rect key="frame" x="165.5" y="88" width="83" height="72.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Icg-uz-aD1">
+                                <rect key="frame" x="85" y="710.5" width="244" height="72.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUu-kx-T4A" userLabel="戻る">
+                                        <rect key="frame" x="0.0" y="0.0" width="72.5" height="72.5"/>
+                                        <state key="normal" image="戻る"/>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bxc-rK-20t">
+                                        <rect key="frame" x="80.5" y="0.0" width="83" height="72.5"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xsg-WA-Zve" userLabel="お気に入り">
+                                        <rect key="frame" x="171.5" y="0.0" width="72.5" height="72.5"/>
+                                        <state key="normal" image="お気に入り"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ndi-R4-ugD" firstAttribute="width" secondItem="6cA-3B-8ag" secondAttribute="width" multiplier="0.2" id="4F1-05-dNY"/>
+                            <constraint firstItem="ndi-R4-ugD" firstAttribute="top" secondItem="6cA-3B-8ag" secondAttribute="top" id="4O7-e5-Z9j"/>
+                            <constraint firstItem="ndi-R4-ugD" firstAttribute="centerX" secondItem="6cA-3B-8ag" secondAttribute="centerX" id="8Kr-LO-NqA"/>
+                            <constraint firstItem="tUu-kx-T4A" firstAttribute="height" secondItem="6cA-3B-8ag" secondAttribute="height" multiplier="0.1" id="As3-fs-2N7"/>
+                            <constraint firstItem="Icg-uz-aD1" firstAttribute="centerX" secondItem="6cA-3B-8ag" secondAttribute="centerX" id="I3i-Ae-H3N"/>
+                            <constraint firstItem="xsg-WA-Zve" firstAttribute="width" secondItem="6cA-3B-8ag" secondAttribute="height" multiplier="0.1" id="NfS-j0-phy"/>
+                            <constraint firstItem="tUu-kx-T4A" firstAttribute="width" secondItem="6cA-3B-8ag" secondAttribute="height" multiplier="0.1" id="Sgt-ul-YI5"/>
+                            <constraint firstItem="ndi-R4-ugD" firstAttribute="height" secondItem="6cA-3B-8ag" secondAttribute="height" multiplier="0.1" id="SiM-X5-8yS"/>
+                            <constraint firstItem="xsg-WA-Zve" firstAttribute="height" secondItem="6cA-3B-8ag" secondAttribute="height" multiplier="0.1" id="rJC-eX-bY1"/>
+                            <constraint firstItem="6cA-3B-8ag" firstAttribute="bottom" secondItem="Icg-uz-aD1" secondAttribute="bottom" constant="30" id="rKJ-og-AOM"/>
+                            <constraint firstItem="Bxc-rK-20t" firstAttribute="width" secondItem="6cA-3B-8ag" secondAttribute="width" multiplier="0.2" id="rd8-lO-lcl"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6cA-3B-8ag"/>
                     </view>
                     <navigationItem key="navigationItem" id="1ma-ZQ-bRP"/>
@@ -28,6 +67,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VnL-YV-yx1" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SvC-XJ-D1c">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -42,4 +82,8 @@
             <point key="canvasLocation" x="-143.47826086956522" y="89.732142857142847"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="お気に入り" width="30.5" height="30.5"/>
+        <image name="戻る" width="30.5" height="30.5"/>
+    </resources>
 </document>
