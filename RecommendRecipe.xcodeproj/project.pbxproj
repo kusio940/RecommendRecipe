@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		484DD12354F4774D2FBDD971 /* Pods_RecommendRecipe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E0A35314030A790B25D8BDF /* Pods_RecommendRecipe.framework */; };
+		4C2BB17D2513C3B500789E51 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BB17C2513C3B500789E51 /* UIColor+Extension.swift */; };
+		4C2BB17F2513C3D300789E51 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BB17E2513C3D300789E51 /* UIViewController+Extension.swift */; };
 		4C3E776E24F6AE2F00F65255 /* CategoryCollectionView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C3E776D24F6AE2F00F65255 /* CategoryCollectionView.storyboard */; };
 		4C3E777224F6AF1100F65255 /* FavoriteCollectionView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C3E777124F6AF1100F65255 /* FavoriteCollectionView.storyboard */; };
 		4C3E777424F6AF3200F65255 /* HistoryView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C3E777324F6AF3200F65255 /* HistoryView.storyboard */; };
@@ -29,6 +31,8 @@
 /* Begin PBXFileReference section */
 		0E0A35314030A790B25D8BDF /* Pods_RecommendRecipe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecommendRecipe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4625289C2C088E222F7C2F47 /* Pods-RecommendRecipe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecommendRecipe.release.xcconfig"; path = "Target Support Files/Pods-RecommendRecipe/Pods-RecommendRecipe.release.xcconfig"; sourceTree = "<group>"; };
+		4C2BB17C2513C3B500789E51 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		4C2BB17E2513C3D300789E51 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		4C3E776D24F6AE2F00F65255 /* CategoryCollectionView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CategoryCollectionView.storyboard; sourceTree = "<group>"; };
 		4C3E777124F6AF1100F65255 /* FavoriteCollectionView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FavoriteCollectionView.storyboard; sourceTree = "<group>"; };
 		4C3E777324F6AF3200F65255 /* HistoryView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HistoryView.storyboard; sourceTree = "<group>"; };
@@ -77,6 +81,15 @@
 				0E0A35314030A790B25D8BDF /* Pods_RecommendRecipe.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4C2BB17B2513C36F00789E51 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4C2BB17C2513C3B500789E51 /* UIColor+Extension.swift */,
+				4C2BB17E2513C3D300789E51 /* UIViewController+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		4C3E776B24F6AC2400F65255 /* Models */ = {
@@ -161,6 +174,7 @@
 		4CECFCF724F2B157002A60B6 /* RecommendRecipe */ = {
 			isa = PBXGroup;
 			children = (
+				4C2BB17B2513C36F00789E51 /* Extensions */,
 				4C3E776C24F6AC3000F65255 /* Resource */,
 				4C3E776B24F6AC2400F65255 /* Models */,
 				4C7E712424F6A98F00F206F0 /* CategorySelectView */,
@@ -320,6 +334,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C2BB17F2513C3D300789E51 /* UIViewController+Extension.swift in Sources */,
+				4C2BB17D2513C3B500789E51 /* UIColor+Extension.swift in Sources */,
 				4CECFCFD24F2B157002A60B6 /* ViewController.swift in Sources */,
 				4CECFCF924F2B157002A60B6 /* AppDelegate.swift in Sources */,
 				4C3E777824F7DB6600F65255 /* CategoryCollectionViewController.swift in Sources */,

@@ -67,6 +67,8 @@ class CategoryCollectionViewController: UICollectionViewController {
         let cellSizeMergin: CGFloat = 7.5
         self.cellSideLength = UIScreen.main.bounds.size.width  * sizeRatio - cellSizeMergin
         self.setCellLayout()
+        
+        self.collectionView.backgroundColor = UIColor.init(rgb: UIColor.baseColor)
 
     }
 
