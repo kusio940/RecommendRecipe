@@ -68,7 +68,7 @@ class CategoryCollectionViewController: UICollectionViewController {
         self.cellSideLength = UIScreen.main.bounds.size.width  * sizeRatio - cellSizeMergin
         self.setCellLayout()
         
-        self.collectionView.backgroundColor = UIColor.init(rgb: UIColor.baseColor)
+        self.collectionView.backgroundColor = UIColor(rgb: UIColor.baseColor)
 
     }
 

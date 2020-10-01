@@ -27,24 +27,24 @@ class RecipeCardViewController: UIViewController {
         
         if let title = self.navigationTitle
         {
-            self.navigationItem.title = title
+            navigationItem.title = title
         }
         
         let reloadBarButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(reloadCard))
-        self.navigationItem.rightBarButtonItem = reloadBarButton
+        navigationItem.rightBarButtonItem = reloadBarButton
                 
         setKolodaView()
-        self.view.addSubview(self.kolodaView)
-        self.kolodaView.dataSource = self
-        self.kolodaView.delegate = self
+        view.addSubview(kolodaView)
+        kolodaView.dataSource = self
+        kolodaView.delegate = self
         
-        self.view.backgroundColor = UIColor.init(rgb: UIColor.baseColor)
-        self.undoButton.tintColor = UIColor.init(rgb: UIColor.undoButtonColor)
+        view.backgroundColor = UIColor(rgb: UIColor.baseColor)
+        undoButton.tintColor = UIColor(rgb: UIColor.undoButtonColor)
     
     }
     
     @objc func reloadCard(){
-        self.kolodaView.resetCurrentCardIndex()
+        kolodaView.resetCurrentCardIndex()
     }
 
     func setKolodaView(){
@@ -53,8 +53,8 @@ class RecipeCardViewController: UIViewController {
         
         let recipeCardWidth = self.view.bounds.width / widthRatio
         let recipeCardHeight = self.view.bounds.height / heightRatio
-        self.kolodaView.frame = CGRect(x: .zero, y: .zero, width: recipeCardWidth, height: recipeCardHeight)
-        self.kolodaView.center = self.view.center
+        kolodaView.frame = CGRect(x: .zero, y: .zero, width: recipeCardWidth, height: recipeCardHeight)
+        kolodaView.center = self.view.center
     }
 
 }
