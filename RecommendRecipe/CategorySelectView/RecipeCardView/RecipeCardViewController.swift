@@ -11,11 +11,11 @@ import Koloda
 
 class RecipeCardViewController: UIViewController {
     
-    @IBOutlet weak var cardCountLabel: UILabel!
-    @IBOutlet weak var undoButton: UIButton!
-    @IBOutlet weak var addFavoriteButton: UIButton!
+    @IBOutlet private weak var cardCountLabel: UILabel!
+    @IBOutlet private weak var undoButton: UIButton!
+    @IBOutlet private weak var addFavoriteButton: UIButton!
     
-    var navigationTitle:String?
+    var navigationTitle: String?
     
     let kolodaView = KolodaView()
     
@@ -25,7 +25,7 @@ class RecipeCardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let title = self.navigationTitle
+        if let title = navigationTitle
         {
             navigationItem.title = title
         }
@@ -34,13 +34,8 @@ class RecipeCardViewController: UIViewController {
         navigationItem.rightBarButtonItem = reloadBarButton
                 
         setKolodaView()
-        view.addSubview(kolodaView)
-        kolodaView.dataSource = self
-        kolodaView.delegate = self
-        
-        view.backgroundColor = UIColor(rgb: UIColor.baseColor)
-        undoButton.tintColor = UIColor(rgb: UIColor.undoButtonColor)
-    
+        setBackgroundColor()
+        setUndoButtonColor()
     }
     
     @objc func reloadCard(){
@@ -51,10 +46,22 @@ class RecipeCardViewController: UIViewController {
         let widthRatio:CGFloat = 1.2
         let heightRatio:CGFloat = 1.8
         
-        let recipeCardWidth = self.view.bounds.width / widthRatio
-        let recipeCardHeight = self.view.bounds.height / heightRatio
+        let recipeCardWidth = view.bounds.width / widthRatio
+        let recipeCardHeight = view.bounds.height / heightRatio
         kolodaView.frame = CGRect(x: .zero, y: .zero, width: recipeCardWidth, height: recipeCardHeight)
-        kolodaView.center = self.view.center
+        kolodaView.center = view.center
+        
+        view.addSubview(kolodaView)
+        kolodaView.dataSource = self
+        kolodaView.delegate = self
+    }
+    
+    func setBackgroundColor(){
+        view.backgroundColor = UIColor(rgb: UIColor.baseColor)
+    }
+    
+    func setUndoButtonColor(){
+        undoButton.tintColor = UIColor(rgb: UIColor.undoButtonColor)
     }
 
 }
@@ -63,8 +70,7 @@ extension RecipeCardViewController: KolodaViewDataSource {
 
     // 表示する件数を指定します
     func kolodaNumberOfCards(_ koloda: KolodaView) -> Int {
-        let numberOfCards:Int = 10
-        return numberOfCards
+        return 10
     }
 
     // カードフリック時のスピードを指定します.

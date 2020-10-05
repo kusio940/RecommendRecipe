@@ -52,28 +52,28 @@ class CategoryCollectionViewController: UICollectionViewController {
         }
     }
     
-    let categoryTypeCount:Int = 16
-    var cellSideLength:CGFloat!
+    let categoryTypeCount: Int = 16
+    var cellSideLength: CGFloat!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let collectionView = self.collectionView else { return }
+        guard let collectionView = collectionView else { return }
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
-        self.navigationItem.title = R.string.titleWord.categoryCollectionViewController()
+        navigationItem.title = R.string.titleWord.categoryCollectionViewController()
         
         let sizeRatio:CGFloat = 0.5
         let cellSizeMergin: CGFloat = 7.5
-        self.cellSideLength = UIScreen.main.bounds.size.width  * sizeRatio - cellSizeMergin
-        self.setCellLayout()
+        cellSideLength = UIScreen.main.bounds.size.width  * sizeRatio - cellSizeMergin
+        setCellLayout()
         
-        self.collectionView.backgroundColor = UIColor(rgb: UIColor.baseColor)
+        collectionView.backgroundColor = UIColor(rgb: UIColor.baseColor)
 
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        self.collectionView.isUserInteractionEnabled = true
+        collectionView.isUserInteractionEnabled = true
     }
     
     func setCellLayout() {
@@ -85,7 +85,7 @@ class CategoryCollectionViewController: UICollectionViewController {
         cellLayout.sectionInset = UIEdgeInsets(top: cellEdgeMergin, left: cellEdgeMergin, bottom: cellEdgeMergin, right: cellEdgeMergin)
         cellLayout.minimumInteritemSpacing = cellMinimumInteritemSpacing
         cellLayout.minimumLineSpacing = cellMinimumLineSpacing
-        cellLayout.itemSize = CGSize(width: self.cellSideLength, height: self.cellSideLength)
+        cellLayout.itemSize = CGSize(width: cellSideLength, height: cellSideLength)
         collectionView.collectionViewLayout = cellLayout
     }
     
@@ -93,7 +93,7 @@ class CategoryCollectionViewController: UICollectionViewController {
         let image = UIImage(named: imageName)
         let imageView = UIImageView(image: image)
         
-        imageView.frame = CGRect(x:.zero, y:.zero, width:self.cellSideLength, height:self.cellSideLength)
+        imageView.frame = CGRect(x:.zero, y:.zero, width:cellSideLength, height:cellSideLength)
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         
@@ -107,7 +107,7 @@ class CategoryCollectionViewController: UICollectionViewController {
         
         let labelBackground = UIView.init(frame: CGRect.init(x: .zero,
                                                              y: parentView.frame.height - yAxisMargin,
-                                                             width: self.cellSideLength,
+                                                             width: cellSideLength,
                                                              height: viewHeight))
         labelBackground.backgroundColor = .white
         labelBackground.alpha = alphaValue
@@ -153,9 +153,9 @@ class CategoryCollectionViewController: UICollectionViewController {
         let optionalCategoryName = CategoryType(rawValue: indexPath.row)?.name
         
         guard let categoryName = optionalCategoryName else { return cell }
-        cell.contentView.addSubview(self.createCategoryImageView(imageName: categoryName))
-        cell.contentView.addSubview(self.createtLabelBackground(parentView: cell))
-        cell.contentView.addSubview(self.createCategoryLabel(parentView: cell, labelText: categoryName))
+        cell.contentView.addSubview(createCategoryImageView(imageName: categoryName))
+        cell.contentView.addSubview(createtLabelBackground(parentView: cell))
+        cell.contentView.addSubview(createCategoryLabel(parentView: cell, labelText: categoryName))
         
         return cell
     }
@@ -164,14 +164,14 @@ class CategoryCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        self.collectionView.isUserInteractionEnabled = false
+        collectionView.isUserInteractionEnabled = false
         let nextViewController = UIStoryboard(name: "RecipeCardView", bundle: nil).instantiateViewController(withIdentifier: "RecipeCardView") as! RecipeCardViewController
         
         let optionalCategoryName = CategoryType(rawValue: indexPath.row)?.name
         
         guard let categoryName = optionalCategoryName else { return }
         nextViewController.navigationTitle = categoryName
-        self.navigationController?.pushViewController(nextViewController, animated: true)
+        navigationController?.pushViewController(nextViewController, animated: true)
         
     }
 
