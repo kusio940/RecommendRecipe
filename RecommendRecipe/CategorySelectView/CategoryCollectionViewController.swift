@@ -93,7 +93,7 @@ class CategoryCollectionViewController: UICollectionViewController {
         let image = UIImage(named: imageName)
         let imageView = UIImageView(image: image)
         
-        imageView.frame = CGRect(x:.zero, y:.zero, width:cellSideLength, height:cellSideLength)
+        imageView.frame = CGRect(x: .zero, y: .zero, width:cellSideLength, height:cellSideLength)
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         

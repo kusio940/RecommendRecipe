@@ -25,6 +25,13 @@ class RecipeCardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setNavigationItem()
+        setKolodaView()
+        setBackgroundColor()
+        setUndoButtonColor()
+    }
+    
+    func setNavigationItem() {
         if let title = navigationTitle
         {
             navigationItem.title = title
@@ -32,17 +39,13 @@ class RecipeCardViewController: UIViewController {
         
         let reloadBarButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(reloadCard))
         navigationItem.rightBarButtonItem = reloadBarButton
-                
-        setKolodaView()
-        setBackgroundColor()
-        setUndoButtonColor()
     }
     
-    @objc func reloadCard(){
+    @objc func reloadCard() {
         kolodaView.resetCurrentCardIndex()
     }
 
-    func setKolodaView(){
+    func setKolodaView() {
         let widthRatio:CGFloat = 1.2
         let heightRatio:CGFloat = 1.8
         
@@ -56,11 +59,11 @@ class RecipeCardViewController: UIViewController {
         kolodaView.delegate = self
     }
     
-    func setBackgroundColor(){
+    func setBackgroundColor() {
         view.backgroundColor = UIColor(rgb: UIColor.baseColor)
     }
     
-    func setUndoButtonColor(){
+    func setUndoButtonColor() {
         undoButton.tintColor = UIColor(rgb: UIColor.undoButtonColor)
     }
 
@@ -93,7 +96,7 @@ extension RecipeCardViewController: KolodaViewDataSource {
         return recipeCardView
     }
     
-    func createRecipeCardView(parentView:KolodaView) -> UIView{
+    func createRecipeCardView(parentView:KolodaView) -> UIView {
         let shadowOpacityValue:Float = 0.2
         let shadowOffsetHeight:CGFloat = 1.5
         
@@ -110,7 +113,7 @@ extension RecipeCardViewController: KolodaViewDataSource {
         return recipeCardView
     }
     
-    func createRecipeTitleLabel(parentView:UIView) -> UILabel{
+    func createRecipeTitleLabel(parentView:UIView) -> UILabel {
         let xAxisRatio:CGFloat = 2
         let yAxisRatio:CGFloat = 15
         
@@ -124,7 +127,7 @@ extension RecipeCardViewController: KolodaViewDataSource {
         return recipeTitleLabel
     }
     
-    func createRecipeImageView(parentView:UIView) -> UIImageView{
+    func createRecipeImageView(parentView:UIView) -> UIImageView {
         let xAxisMargin:CGFloat = 10
         let yAxisRatio:CGFloat = 8
         let widthMargin:CGFloat = 20
@@ -138,7 +141,7 @@ extension RecipeCardViewController: KolodaViewDataSource {
         return recipeImageView
     }
     
-    func createRecipeDescriptionTextView(parentView:UIView) -> UITextView{
+    func createRecipeDescriptionTextView(parentView:UIView) -> UITextView {
         let xAxisMargin:CGFloat = 10
         let yAxisRatio:CGFloat = 1.5
         let widthMargin:CGFloat = 20
