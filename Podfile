@@ -7,5 +7,6 @@ target 'RecommendRecipe' do
 
   # Pods for RecommendRecipe
   pod 'R.swift'
+  pod 'Koloda'
 
 end
