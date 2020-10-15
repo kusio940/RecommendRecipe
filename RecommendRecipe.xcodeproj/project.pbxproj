@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		484DD12354F4774D2FBDD971 /* Pods_RecommendRecipe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E0A35314030A790B25D8BDF /* Pods_RecommendRecipe.framework */; };
+		4C07663D25360B78008EA5F2 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C07663C25360B78008EA5F2 /* UIImageView+Extension.swift */; };
 		4C2BB17D2513C3B500789E51 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BB17C2513C3B500789E51 /* UIColor+Extension.swift */; };
 		4C2BB17F2513C3D300789E51 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BB17E2513C3D300789E51 /* UIViewController+Extension.swift */; };
 		4C3E776E24F6AE2F00F65255 /* CategoryCollectionView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C3E776D24F6AE2F00F65255 /* CategoryCollectionView.storyboard */; };
@@ -20,6 +21,10 @@
 		4C3E778024F8019400F65255 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3E777F24F8019400F65255 /* R.generated.swift */; };
 		4C3E778224F8020300F65255 /* CategoryType.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C3E778124F8020300F65255 /* CategoryType.strings */; };
 		4C3E778424F8096C00F65255 /* TitleWord.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C3E778324F8096C00F65255 /* TitleWord.strings */; };
+		4C6F90F925261D7600DD2F76 /* RakutenRecipeApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F90F825261D7600DD2F76 /* RakutenRecipeApiClient.swift */; };
+		4C6F90FC2526249300DD2F76 /* RakutenRecipeApi.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C6F90FB2526249300DD2F76 /* RakutenRecipeApi.strings */; };
+		4C6F90FF2527670100DD2F76 /* RecipeCardViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F90FE2527670100DD2F76 /* RecipeCardViewController+Extension.swift */; };
+		4C6F910A2527727000DD2F76 /* RecipeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F91092527727000DD2F76 /* RecipeData.swift */; };
 		4CECFCF924F2B157002A60B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CECFCF824F2B157002A60B6 /* AppDelegate.swift */; };
 		4CECFCFB24F2B157002A60B6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CECFCFA24F2B157002A60B6 /* SceneDelegate.swift */; };
 		4CECFCFD24F2B157002A60B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CECFCFC24F2B157002A60B6 /* ViewController.swift */; };
@@ -31,6 +36,7 @@
 /* Begin PBXFileReference section */
 		0E0A35314030A790B25D8BDF /* Pods_RecommendRecipe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecommendRecipe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4625289C2C088E222F7C2F47 /* Pods-RecommendRecipe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecommendRecipe.release.xcconfig"; path = "Target Support Files/Pods-RecommendRecipe/Pods-RecommendRecipe.release.xcconfig"; sourceTree = "<group>"; };
+		4C07663C25360B78008EA5F2 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		4C2BB17C2513C3B500789E51 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		4C2BB17E2513C3D300789E51 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		4C3E776D24F6AE2F00F65255 /* CategoryCollectionView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CategoryCollectionView.storyboard; sourceTree = "<group>"; };
@@ -43,6 +49,10 @@
 		4C3E777F24F8019400F65255 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		4C3E778124F8020300F65255 /* CategoryType.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = CategoryType.strings; sourceTree = "<group>"; };
 		4C3E778324F8096C00F65255 /* TitleWord.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = TitleWord.strings; sourceTree = "<group>"; };
+		4C6F90F825261D7600DD2F76 /* RakutenRecipeApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RakutenRecipeApiClient.swift; sourceTree = "<group>"; };
+		4C6F90FB2526249300DD2F76 /* RakutenRecipeApi.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = RakutenRecipeApi.strings; sourceTree = "<group>"; };
+		4C6F90FE2527670100DD2F76 /* RecipeCardViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecipeCardViewController+Extension.swift"; sourceTree = "<group>"; };
+		4C6F91092527727000DD2F76 /* RecipeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeData.swift; sourceTree = "<group>"; };
 		4CECFCF524F2B157002A60B6 /* RecommendRecipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecommendRecipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CECFCF824F2B157002A60B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4CECFCFA24F2B157002A60B6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +98,7 @@
 			children = (
 				4C2BB17C2513C3B500789E51 /* UIColor+Extension.swift */,
 				4C2BB17E2513C3D300789E51 /* UIViewController+Extension.swift */,
+				4C07663C25360B78008EA5F2 /* UIImageView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -95,6 +106,8 @@
 		4C3E776B24F6AC2400F65255 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4C6F90F825261D7600DD2F76 /* RakutenRecipeApiClient.swift */,
+				4C6F91092527727000DD2F76 /* RecipeData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -106,6 +119,7 @@
 				4CECFD0124F2B158002A60B6 /* Assets.xcassets */,
 				4C3E778124F8020300F65255 /* CategoryType.strings */,
 				4C3E778324F8096C00F65255 /* TitleWord.strings */,
+				4C6F90FB2526249300DD2F76 /* RakutenRecipeApi.strings */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -115,6 +129,7 @@
 			children = (
 				4C3E777A24F7F05600F65255 /* RecipeCardView.storyboard */,
 				4C3E777C24F7F06F00F65255 /* RecipeCardViewController.swift */,
+				4C6F90FE2527670100DD2F76 /* RecipeCardViewController+Extension.swift */,
 			);
 			path = RecipeCardView;
 			sourceTree = "<group>";
@@ -221,7 +236,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1150;
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = Miyanaga;
 				TargetAttributes = {
 					4CECFCF424F2B157002A60B6 = {
@@ -255,6 +270,7 @@
 				4C3E778224F8020300F65255 /* CategoryType.strings in Resources */,
 				4C3E778424F8096C00F65255 /* TitleWord.strings in Resources */,
 				4CECFD0524F2B158002A60B6 /* LaunchScreen.storyboard in Resources */,
+				4C6F90FC2526249300DD2F76 /* RakutenRecipeApi.strings in Resources */,
 				4CECFD0224F2B158002A60B6 /* Assets.xcassets in Resources */,
 				4CECFD0024F2B157002A60B6 /* Main.storyboard in Resources */,
 				4C3E777224F6AF1100F65255 /* FavoriteCollectionView.storyboard in Resources */,
@@ -336,10 +352,14 @@
 			files = (
 				4C2BB17F2513C3D300789E51 /* UIViewController+Extension.swift in Sources */,
 				4C2BB17D2513C3B500789E51 /* UIColor+Extension.swift in Sources */,
+				4C6F90F925261D7600DD2F76 /* RakutenRecipeApiClient.swift in Sources */,
 				4CECFCFD24F2B157002A60B6 /* ViewController.swift in Sources */,
 				4CECFCF924F2B157002A60B6 /* AppDelegate.swift in Sources */,
 				4C3E777824F7DB6600F65255 /* CategoryCollectionViewController.swift in Sources */,
+				4C07663D25360B78008EA5F2 /* UIImageView+Extension.swift in Sources */,
+				4C6F90FF2527670100DD2F76 /* RecipeCardViewController+Extension.swift in Sources */,
 				4CECFCFB24F2B157002A60B6 /* SceneDelegate.swift in Sources */,
+				4C6F910A2527727000DD2F76 /* RecipeData.swift in Sources */,
 				4C3E777D24F7F06F00F65255 /* RecipeCardViewController.swift in Sources */,
 				4C3E778024F8019400F65255 /* R.generated.swift in Sources */,
 			);
@@ -393,6 +413,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -453,6 +474,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
