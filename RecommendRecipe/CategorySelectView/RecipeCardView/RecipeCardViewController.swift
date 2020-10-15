@@ -46,6 +46,7 @@ class RecipeCardViewController: UIViewController {
     }
     
     @objc func reloadCard() {
+        self.recipeDataArray = []
         updateRecipeCard()
     }
 
@@ -76,26 +77,32 @@ class RecipeCardViewController: UIViewController {
         let rakutenRecipeApiClient = RakutenRecipeApiClient()
         let fetchCount: Int = 2
         var beforeSmallCategoryNumber: Int = -1
+        let waitTime: Float = 0.8
+        let lastCount: Int = fetchCount - 1
         
         guard let categoryType = self.navigationItem.title else{ return }
         
         startIndicator(view: view, activityIndicatorView: activityIndicator)
         DispatchQueue.global(qos: .userInitiated).async {
             
-            for _ in 0 ..< fetchCount {
+            for currentCount in 0 ..< fetchCount {
                 let smallCategoryNumber = self.generateRandamNumber(categoryType: categoryType, exclusionNumber: beforeSmallCategoryNumber)
                 beforeSmallCategoryNumber = smallCategoryNumber
-                
-                guard let categoryID = RakutenRecipeCategoryId(rawValue: categoryType)?.getCategoryId(smallCategoryNumber: 0)
+
+                guard let categoryID = RakutenRecipeCategoryId(rawValue: categoryType)?.getCategoryId(smallCategoryNumber: smallCategoryNumber)
                 else{
                     DispatchQueue.main.async {
                         self.stopIndicator(activityIndicatorView: self.activityIndicator)
                     }
                     return
                 }
-                
                 let dataArray = rakutenRecipeApiClient.fetchCategoryRanking(categoryID: categoryID, categoryType: categoryType)
                 self.recipeDataArray.append(contentsOf: dataArray)
+
+                if(currentCount != lastCount) {
+                    //API連続呼び出しができないので一定時間待つ
+                    Thread.sleep(forTimeInterval: TimeInterval(waitTime))
+                }
             }
             
             DispatchQueue.main.async {

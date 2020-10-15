@@ -11,11 +11,6 @@ import SwiftyJSON
 
 class RakutenRecipeApiClient{
 
-    let headers = [
-        "x-rapidapi-host": R.string.rakutenRecipeApi.host(),
-        "x-rapidapi-key": R.string.rakutenRecipeApi.key()
-    ]
-    
     func fetchCategoryRanking(categoryID: String, categoryType: String) -> Array<RecipeData> {
         
         let semaphore = DispatchSemaphore(value: 0)
@@ -66,7 +61,7 @@ class RakutenRecipeApiClient{
     
     func createUrl(categoryID: String) -> URL? {
         let urlString = R.string.rakutenRecipeApi.url() + categoryID
-        return URL(string:urlString)
+        return URL(string:urlString + categoryID)
     }
     
     func createRequest(url: URL) -> URLRequest? {
@@ -74,7 +69,6 @@ class RakutenRecipeApiClient{
                                  cachePolicy: .useProtocolCachePolicy,
                                  timeoutInterval: 10.0)
         request.httpMethod = "GET"
-        request.allHTTPHeaderFields = headers
         
         return request
     }
