@@ -16,7 +16,7 @@ class RecipeCardViewController: UIViewController {
     @IBOutlet private weak var addFavoriteButton: UIButton!
     
     var navigationTitle: String?
-    let recipeCardCount: NSInteger = 2
+    let recipeCardCount: NSInteger = 8
     
     let kolodaView = KolodaView()
 
@@ -30,9 +30,10 @@ class RecipeCardViewController: UIViewController {
         setNavigationItem()
         setKolodaView()
         setBackgroundColor()
-        setUndoButtonColor()
         
+        updateUndoButton()
         updateRecipeCard()
+        updateCardCountLabel()
     }
     
     func setNavigationItem() {
@@ -48,6 +49,8 @@ class RecipeCardViewController: UIViewController {
     @objc func reloadCard() {
         self.recipeDataArray = []
         updateRecipeCard()
+        updateCardCountLabel()
+        updateUndoButton()
     }
 
     func setKolodaView() {
@@ -67,9 +70,32 @@ class RecipeCardViewController: UIViewController {
     func setBackgroundColor() {
         view.backgroundColor = UIColor(rgb: UIColor.baseColor)
     }
+        
+    func updateUndoButton() {
+        let currentCount = kolodaView.currentCardIndex + 1
+        let firstCount = 1
+        
+        if(currentCount == firstCount) {
+            undoButton.addTarget(self, action: #selector(undoCard), for: .touchUpInside)
+            undoButton.tintColor = UIColor.gray
+            undoButton.isEnabled = false
+        } else {
+            undoButton.tintColor = UIColor(rgb: UIColor.undoButtonColor)
+            undoButton.isEnabled = true
+        }
+    }
     
-    func setUndoButtonColor() {
-        undoButton.tintColor = UIColor(rgb: UIColor.undoButtonColor)
+    @objc func undoCard(){
+        kolodaView.revertAction()
+        updateCardCountLabel()
+        updateUndoButton()
+    }
+    
+    func updateCardCountLabel() {
+        let currentCount = kolodaView.currentCardIndex + 1
+        if(currentCount <= recipeCardCount) {
+            cardCountLabel.text = String(currentCount) + "/" + String(recipeCardCount)
+        }
     }
     
     func updateRecipeCard() {
@@ -273,6 +299,8 @@ extension RecipeCardViewController: KolodaViewDelegate {
     }
 
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
+        updateCardCountLabel()
+        updateUndoButton()
     }
 
     //カードタップ時のイベント
