@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,14 +18,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10/10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="ndi-R4-ugD">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8/8" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="ndi-R4-ugD">
                                 <rect key="frame" x="165.5" y="88" width="83" height="72.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Icg-uz-aD1">
-                                <rect key="frame" x="85" y="710.5" width="244" height="72.5"/>
+                                <rect key="frame" x="85" y="720.5" width="244" height="72.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUu-kx-T4A" userLabel="戻る">
                                         <rect key="frame" x="0.0" y="0.0" width="72.5" height="72.5"/>
@@ -39,7 +41,8 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="6cA-3B-8ag"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="ndi-R4-ugD" firstAttribute="width" secondItem="6cA-3B-8ag" secondAttribute="width" multiplier="0.2" id="4F1-05-dNY"/>
                             <constraint firstItem="ndi-R4-ugD" firstAttribute="top" secondItem="6cA-3B-8ag" secondAttribute="top" id="4O7-e5-Z9j"/>
@@ -50,10 +53,9 @@
                             <constraint firstItem="tUu-kx-T4A" firstAttribute="width" secondItem="6cA-3B-8ag" secondAttribute="height" multiplier="0.1" id="Sgt-ul-YI5"/>
                             <constraint firstItem="ndi-R4-ugD" firstAttribute="height" secondItem="6cA-3B-8ag" secondAttribute="height" multiplier="0.1" id="SiM-X5-8yS"/>
                             <constraint firstItem="xsg-WA-Zve" firstAttribute="height" secondItem="6cA-3B-8ag" secondAttribute="height" multiplier="0.1" id="rJC-eX-bY1"/>
-                            <constraint firstItem="6cA-3B-8ag" firstAttribute="bottom" secondItem="Icg-uz-aD1" secondAttribute="bottom" constant="30" id="rKJ-og-AOM"/>
+                            <constraint firstItem="6cA-3B-8ag" firstAttribute="bottom" secondItem="Icg-uz-aD1" secondAttribute="bottom" constant="20" id="rKJ-og-AOM"/>
                             <constraint firstItem="Bxc-rK-20t" firstAttribute="width" secondItem="6cA-3B-8ag" secondAttribute="width" multiplier="0.2" id="rd8-lO-lcl"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6cA-3B-8ag"/>
                     </view>
                     <navigationItem key="navigationItem" id="1ma-ZQ-bRP"/>
                     <connections>
@@ -89,5 +91,8 @@
     <resources>
         <image name="お気に入り" width="30.5" height="30.5"/>
         <image name="戻る" width="30.5" height="30.5"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

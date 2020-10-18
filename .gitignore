@@ -24,3 +24,4 @@ Pods/*
 !.gitkeep
 .DS_Store
 *.generated.swift
+RakutenRecipeApi.strings
