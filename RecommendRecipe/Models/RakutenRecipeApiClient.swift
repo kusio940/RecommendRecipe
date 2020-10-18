@@ -11,13 +11,12 @@ import SwiftyJSON
 
 class RakutenRecipeApiClient{
 
-    func fetchCategoryRanking(categoryID: String, categoryType: String) -> Array<RecipeData> {
+    func fetchCategoryRanking(categoryID: String, categoryType: String, complete: @escaping (Array<RecipeData>)->()) {
         
-        let semaphore = DispatchSemaphore(value: 0)
         var responseArray:[RecipeData] = []
         
-        guard let url = createUrl(categoryID: categoryID) else{ return responseArray }
-        guard let request = createRequest(url: url) else{ return responseArray }
+        guard let url = createUrl(categoryID: categoryID) else { return }
+        guard let request = createRequest(url: url) else { return }
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let data = data, let response = response {
@@ -50,18 +49,16 @@ class RakutenRecipeApiClient{
             } else {
                 print(error ?? "unknown error")
             }
-            semaphore.signal()
+            complete(responseArray)
         }
 
         task.resume()
-        
-        semaphore.wait()
-        return responseArray
     }
     
     func createUrl(categoryID: String) -> URL? {
         let urlString = R.string.rakutenRecipeApi.url() + categoryID
-        return URL(string:urlString + categoryID)
+        print(urlString)
+        return URL(string:urlString)
     }
     
     func createRequest(url: URL) -> URLRequest? {

@@ -72,47 +72,49 @@ class RecipeCardViewController: UIViewController {
         undoButton.tintColor = UIColor(rgb: UIColor.undoButtonColor)
     }
     
-    func updateRecipeCard(){
+    func updateRecipeCard() {
         
         let rakutenRecipeApiClient = RakutenRecipeApiClient()
         let fetchCount: Int = 2
         var beforeSmallCategoryNumber: Int = -1
-        let waitTime: Float = 0.8
+        let waitTime: Float = 1.2
         let lastCount: Int = fetchCount - 1
         
-        guard let categoryType = self.navigationItem.title else{ return }
+        guard let categoryType = self.navigationItem.title else { return }
         
         startIndicator(view: view, activityIndicatorView: activityIndicator)
-        DispatchQueue.global(qos: .userInitiated).async {
+        
+        for currentCount in 0 ..< fetchCount {
+            let smallCategoryNumber = self.generateRandamNumber(categoryType: categoryType, exclusionNumber: beforeSmallCategoryNumber)
+            beforeSmallCategoryNumber = smallCategoryNumber
             
-            for currentCount in 0 ..< fetchCount {
-                let smallCategoryNumber = self.generateRandamNumber(categoryType: categoryType, exclusionNumber: beforeSmallCategoryNumber)
-                beforeSmallCategoryNumber = smallCategoryNumber
-
-                guard let categoryID = RakutenRecipeCategoryId(rawValue: categoryType)?.getCategoryId(smallCategoryNumber: smallCategoryNumber)
-                else{
+            guard let categoryID = RakutenRecipeCategoryId(rawValue: categoryType)?.getCategoryId(smallCategoryNumber: smallCategoryNumber)
+            else{
+                stopIndicator(activityIndicatorView: self.activityIndicator)
+                return
+            }
+            
+            rakutenRecipeApiClient.fetchCategoryRanking(categoryID: categoryID, categoryType: categoryType) { (dataArray) in
+                if(!dataArray.isEmpty){
+                    self.recipeDataArray.append(contentsOf: dataArray)
+                }
+                
+                if(currentCount == lastCount){
                     DispatchQueue.main.async {
                         self.stopIndicator(activityIndicatorView: self.activityIndicator)
+                        self.kolodaView.resetCurrentCardIndex()
                     }
-                    return
-                }
-                let dataArray = rakutenRecipeApiClient.fetchCategoryRanking(categoryID: categoryID, categoryType: categoryType)
-                self.recipeDataArray.append(contentsOf: dataArray)
-
-                if(currentCount != lastCount) {
-                    //API連続呼び出しができないので一定時間待つ
-                    Thread.sleep(forTimeInterval: TimeInterval(waitTime))
                 }
             }
             
-            DispatchQueue.main.async {
-                self.stopIndicator(activityIndicatorView: self.activityIndicator)
-                self.kolodaView.resetCurrentCardIndex()
+            if(currentCount != lastCount) {
+                //API連続呼び出しができないので一定時間待つ
+                Thread.sleep(forTimeInterval: TimeInterval(waitTime))
             }
         }
     }
     
-    func generateRandamNumber(categoryType: String, exclusionNumber: Int) -> Int{
+    func generateRandamNumber(categoryType: String, exclusionNumber: Int) -> Int {
         //アンラップ失敗時は、異常値として−１を返す
         guard let maxNumber = IncludedCategoryCount(rawValue: categoryType)?.CategoryCount else { return -1 }
         
@@ -152,7 +154,7 @@ extension RecipeCardViewController: KolodaViewDataSource {
         // ラベルを表示する
         recipeCardView.addSubview(createRecipeTitleLabel(parentView: recipeCardView, index: index))
         // レシピの説明を表示
-        recipeCardView.addSubview(createRecipeDescriptionTextView(parentView: recipeCardView, index: index))
+        recipeCardView.addSubview(createRecipeDescriptionLabel(parentView: recipeCardView, index: index))
 
         return recipeCardView
     }
@@ -194,7 +196,7 @@ extension RecipeCardViewController: KolodaViewDataSource {
     
     func createRecipeTitleLabel(parentView: UIView, index: Int) -> UILabel {
         let xAxisMargin: CGFloat = 10
-        let yAxisRatio: CGFloat = 15
+        let yAxisRatio: CGFloat = 30
         let widthMargin: CGFloat = 20
         let recipeTitleLabelHeight: CGFloat = 20.5
         
@@ -204,6 +206,7 @@ extension RecipeCardViewController: KolodaViewDataSource {
                                                      height: recipeTitleLabelHeight))
 
         recipeTitleLabel.textColor = UIColor.black
+        recipeTitleLabel.font = UIFont.boldSystemFont(ofSize: recipeTitleLabelHeight)
         
         if(recipeDataArray.count >= recipeCardCount) {
             recipeTitleLabel.text = recipeDataArray[index].recipeTitle
@@ -216,35 +219,42 @@ extension RecipeCardViewController: KolodaViewDataSource {
         recipeTitleLabel.backgroundColor = .white
         recipeTitleLabel.alpha = alphaValue
         
+        recipeTitleLabel.numberOfLines = 0
+        recipeTitleLabel.sizeToFit()
+        
         return recipeTitleLabel
     }
         
-    func createRecipeDescriptionTextView(parentView: UIView, index: Int) -> UITextView {
+    func createRecipeDescriptionLabel(parentView: UIView, index: Int) -> UILabel {
         let xAxisMargin: CGFloat = 10
         let yAxisMargin: CGFloat = 5
         let widthMargin: CGFloat = 20
         let heightRatio: CGFloat = 4
+        let recipeDescriptionLabelHeight: CGFloat = 20.5
         
-        let recipeDescriptionTextView = UITextView(frame: CGRect(x: xAxisMargin,
+        let recipeDescriptionLabel = UILabel(frame: CGRect(x: xAxisMargin,
                                                                  y: parentView.bounds.height - (parentView.bounds.height / heightRatio) - yAxisMargin,
                                                                  width: parentView.bounds.width - widthMargin,
-                                                                 height: parentView.bounds.height / heightRatio))
-        recipeDescriptionTextView.isEditable = false
-        recipeDescriptionTextView.textColor = UIColor.black
-        recipeDescriptionTextView.backgroundColor = UIColor.white
+                                                                 height: recipeDescriptionLabelHeight))
+        
+        recipeDescriptionLabel.textColor = UIColor.black
+        recipeDescriptionLabel.backgroundColor = UIColor.white
         
         if(recipeDataArray.count >= recipeCardCount) {
-            recipeDescriptionTextView.text = recipeDataArray[index].recipeDescription
+            recipeDescriptionLabel.text = recipeDataArray[index].recipeDescription
         }
         else {
-            recipeDescriptionTextView.text = ""
+            recipeDescriptionLabel.text = ""
         }
         
         let alphaValue:CGFloat = 0.7
-        recipeDescriptionTextView.backgroundColor = .white
-        recipeDescriptionTextView.alpha = alphaValue
+        recipeDescriptionLabel.backgroundColor = .white
+        recipeDescriptionLabel.alpha = alphaValue
         
-        return recipeDescriptionTextView
+        recipeDescriptionLabel.numberOfLines = 0
+        recipeDescriptionLabel.sizeToFit()
+        
+        return recipeDescriptionLabel
     }
 
 }
