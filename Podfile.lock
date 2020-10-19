@@ -5,11 +5,17 @@ PODS:
   - R.swift (5.2.2):
     - R.swift.Library (~> 5.2.0)
   - R.swift.Library (5.2.0)
+  - Realm (10.0.0):
+    - Realm/Headers (= 10.0.0)
+  - Realm/Headers (10.0.0)
+  - RealmSwift (10.0.0):
+    - Realm (= 10.0.0)
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
   - Koloda
   - R.swift
+  - RealmSwift
   - SwiftyJSON
 
 SPEC REPOS:
@@ -18,6 +24,8 @@ SPEC REPOS:
     - pop
     - R.swift
     - R.swift.Library
+    - Realm
+    - RealmSwift
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -25,8 +33,10 @@ SPEC CHECKSUMS:
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   R.swift: 7c52cdc57a66840ffe6cbd8a823d732059d42a32
   R.swift.Library: 5ba4f1631300caf9a4d890186930da85d540769d
+  Realm: 5654b8e5e45034d07b219e089034be2ef7d1e7bf
+  RealmSwift: 5b4c8c85be4c14ff52054a4d80a8d338167dd79c
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 8aef5115945e9bf39b101d1585175d3f37129f63
+PODFILE CHECKSUM: 3ec8dca90ab71ed15ea4bbb825b8da8e4bf8d241
 
 COCOAPODS: 1.8.4

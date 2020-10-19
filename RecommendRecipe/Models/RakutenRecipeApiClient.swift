@@ -25,14 +25,19 @@ class RakutenRecipeApiClient{
                         let json = try JSON(data: data)
                         
                         for recipeData in json["result"].array! {
-                            let recipeId = recipeData["recipeId"].string
+                            let recipeId = recipeData["recipeId"].int
                             let recipeTitle = recipeData["recipeTitle"].string
                             let recipeImageUrl = recipeData["foodImageUrl"].string
                             let recipeUrl = recipeData["recipeUrl"].string
                             let recipeDescription = recipeData["recipeDescription"].string
                             let categoryType = categoryType
                             
-                            responseArray.append(RecipeData(recipeId: recipeId ?? "",
+                            var recipeIdString = String(recipeId ?? -1)
+                            if(recipeIdString == "-1") {
+                                recipeIdString = ""
+                            }
+                        
+                            responseArray.append(RecipeData(recipeId: recipeIdString,
                                                             recipeTitle: recipeTitle ?? "",
                                                             recipeImageUrl: recipeImageUrl ?? "",
                                                             recipeUrl: recipeUrl ?? "",
