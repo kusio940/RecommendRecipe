@@ -20,7 +20,6 @@ class RecipeCardViewController: UIViewController {
     let recipeCardCount: NSInteger = 8
     
     let kolodaView = KolodaView()
-    let realmManager = RealmManager()
     
     let activityIndicator = UIActivityIndicatorView()
     
@@ -83,42 +82,42 @@ class RecipeCardViewController: UIViewController {
         let currentIndex = kolodaView.currentCardIndex
         let currentRecipeId = recipeDataArray[currentIndex].recipeId
         
-        if(realmManager.isExistRecipeId(realmObject: Favorite.self, recipeId: currentRecipeId))
-        {
-            addFavoriteButton.tintColor = UIColor.systemYellow
-        }
-        else {
-            addFavoriteButton.tintColor = UIColor.gray
-        }
-
+        let isExistRecipeId = RealmManager.shared.isExistRecipeId(realmObject: Favorite.self, recipeId: currentRecipeId)
+        addFavoriteButton.tintColor = isExistRecipeId ? .systemYellow : .gray
     }
     
     @objc func addFavorite() {
         let currentIndex = kolodaView.currentCardIndex
         let currentRecipeData = recipeDataArray[currentIndex]
-        guard let categoryType = self.navigationItem.title else { return }
+        guard let categoryType = navigationItem.title else { return }
         
-        if(realmManager.isExistRecipeId(realmObject: Favorite.self, recipeId: currentRecipeData.recipeId))
+        let isExistRecipeId = RealmManager.shared.isExistRecipeId(realmObject: Favorite.self, recipeId: currentRecipeData.recipeId)
+        if(isExistRecipeId)
         {
-            addFavoriteButton.tintColor = UIColor.gray
-            realmManager.deleteDbDataWithRecipeId(realmObject: Favorite.self, recipeId: recipeDataArray[kolodaView.currentCardIndex].recipeId)
+            let favorite = RealmManager.shared.getObject(type: Favorite.self).filter("recipeId = %@", currentRecipeData.recipeId).first!
+            RealmManager.shared.deleteData(object: favorite)
         }
         else
         {
-            addFavoriteButton.tintColor = UIColor.systemYellow
-            realmManager.favorireWrite(recipeId: currentRecipeData.recipeId,
-                                       recipeTitle: currentRecipeData.recipeTitle,
-                                       recipeImageUrl: currentRecipeData.recipeImageUrl,
-                                       recipeUrl: currentRecipeData.recipeUrl,
-                                       categoryType: categoryType)
+            let favorite = Favorite()
+            
+            favorite.recipeId = currentRecipeData.recipeId
+            favorite.recipeTitle = currentRecipeData.recipeTitle
+            favorite.recipeImageUrl = currentRecipeData.recipeImageUrl
+            favorite.recipeUrl = currentRecipeData.recipeUrl
+            favorite.categoryType = categoryType
+            favorite.time = Date().getCurrentTime()
+            
+            RealmManager.shared.addDbData(object: favorite)
         }
+        updateFavotiteButton()
     }
         
     func updateUndoButton() {
         let currentIndex = kolodaView.currentCardIndex
-        let firstIndex = 0
+        let firstIndex:Int = .zero
         
-        if(currentIndex == firstIndex) {
+        if (currentIndex == firstIndex) {
             undoButton.tintColor = UIColor.gray
             undoButton.isEnabled = false
         } else {
@@ -348,9 +347,12 @@ extension RecipeCardViewController: KolodaViewDelegate {
     }
 
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
-        updateCardCountLabel()
-        updateUndoButton()
-        updateFavotiteButton()
+        let maxIndex = recipeCardCount - 1
+        if (index < maxIndex) {
+            updateCardCountLabel()
+            updateUndoButton()
+            updateFavotiteButton()
+        }
     }
 
     //カードタップ時のイベント

@@ -33,7 +33,8 @@ class RakutenRecipeApiClient{
                             let categoryType = categoryType
                             
                             var recipeIdString = String(recipeId ?? -1)
-                            if(recipeIdString == "-1") {
+                            let errorRecipeId = "-1"
+                            if(recipeIdString == errorRecipeId) {
                                 recipeIdString = ""
                             }
                         

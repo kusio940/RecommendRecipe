@@ -12,37 +12,24 @@ import RealmSwift
 class RealmManager {
     
     let realm = try! Realm()
-    let realmFilePath =  NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "/default.realm"
+    static let shared = RealmManager()
+    let realmFilePath =  NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first ?? "" + "/default.realm"
     
-    func favorireWrite(recipeId:String,
-                       recipeTitle:String,
-                       recipeImageUrl:String,
-                       recipeUrl:String,
-                       categoryType:String)
-    {
-        let favorite = Favorite()
-        
-        favorite.recipeId = recipeId
-        favorite.recipeTitle = recipeTitle
-        favorite.recipeImageUrl = recipeImageUrl
-        favorite.recipeUrl = recipeUrl
-        favorite.categoryType = categoryType
-        favorite.time = Date().getCurrentTime()
-        
+    func getObject(type: Object.Type) -> Results<Object> {
+        return realm.objects(type.self)
+    }
+    
+    func addDbData(object: Object) {
         try! realm.write {
-            realm.add(favorite, update: .all)
+            realm.add(object, update: .all)
         }
     }
     
-    func deleteDbDataWithRecipeId<Element: Object>(realmObject: Element.Type, recipeId:String) {
-        if(isExistRecipeId(realmObject: Element.self, recipeId: recipeId)) {
-            try! realm.write {
-                let condition:String = "recipeId == '\(recipeId)'"
-                let results = realm.objects(Element.self).filter(condition).first!
-                realm.delete(results)
-            }
-        }
-    }
+    func deleteData(object: Object) {
+         try! realm.write {
+             realm.delete(object)
+         }
+     }
     
     func isExistRecipeId<Element: Object>(realmObject: Element.Type, recipeId:String)-> Bool {
         if(!FileManager.default.fileExists(atPath: realmFilePath)){
