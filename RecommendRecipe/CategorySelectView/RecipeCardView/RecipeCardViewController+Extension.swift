@@ -391,19 +391,19 @@ extension RecipeCardViewController{
             
             var Id: String {
                 switch self {
-                case .okara:        return "33-352"
-                case .stsuage:      return "33-353"
-                case .natto:        return "33-354"
-                case .koyaTofu:     return "33-355"
-                case .soyMilk:      return "33-356"
-                case .cottonTofu:   return "33-357"
-                case .silkenTofu:   return "33-358"
-                case .friedTofu:    return "33-359"
-                case .soyMeat:      return "33-360"
-                case .saltedTofu:   return "33-361"
-                case .otherTofu:    return "33-362"
-                case .tofuDish:     return "33-363"
-                case .marboTofu:    return "33-364"
+                case .okara:        return "35-466"
+                case .stsuage:      return "35-467"
+                case .natto:        return "35-468"
+                case .koyaTofu:     return "35-469"
+                case .soyMilk:      return "35-470"
+                case .cottonTofu:   return "35-471"
+                case .silkenTofu:   return "35-472"
+                case .friedTofu:    return "35-473"
+                case .soyMeat:      return "35-474"
+                case .saltedTofu:   return "35-475"
+                case .otherTofu:    return "35-476"
+                case .tofuDish:     return "30-315"
+                case .marboTofu:    return "41-534"
                 }
             }
         }

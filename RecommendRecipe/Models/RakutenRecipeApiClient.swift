@@ -37,7 +37,7 @@ class RakutenRecipeApiClient{
                             if(recipeIdString == errorRecipeId) {
                                 recipeIdString = ""
                             }
-                        
+                            
                             responseArray.append(RecipeData(recipeId: recipeIdString,
                                                             recipeTitle: recipeTitle ?? "",
                                                             recipeImageUrl: recipeImageUrl ?? "",
@@ -63,7 +63,6 @@ class RakutenRecipeApiClient{
     
     func createUrl(categoryID: String) -> URL? {
         let urlString = R.string.rakutenRecipeApi.url() + categoryID
-        print(urlString)
         return URL(string:urlString)
     }
     

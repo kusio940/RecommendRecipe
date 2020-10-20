@@ -33,9 +33,7 @@ class RecipeCardViewController: UIViewController {
         setBackgroundColor()
         setButtonTarget()
         
-        updateUndoButton()
         updateRecipeCard()
-        updateCardCountLabel()
     }
     
     func setNavigationItem() {
@@ -50,9 +48,7 @@ class RecipeCardViewController: UIViewController {
     
     @objc func reloadCard() {
         self.recipeDataArray = []
-        updateCardCountLabel()
         updateRecipeCard()
-        updateUndoButton()
     }
 
     func setKolodaView() {
@@ -79,6 +75,8 @@ class RecipeCardViewController: UIViewController {
     }
     
     func updateFavotiteButton() {
+        if (recipeDataArray.isEmpty) { return }
+        
         let currentIndex = kolodaView.currentCardIndex
         let currentRecipeId = recipeDataArray[currentIndex].recipeId
         
@@ -87,6 +85,8 @@ class RecipeCardViewController: UIViewController {
     }
     
     @objc func addFavorite() {
+        if (recipeDataArray.isEmpty) { return }
+        
         let currentIndex = kolodaView.currentCardIndex
         let currentRecipeData = recipeDataArray[currentIndex]
         guard let categoryType = navigationItem.title else { return }
@@ -135,10 +135,9 @@ class RecipeCardViewController: UIViewController {
     
     func updateCardCountLabel() {
         let currentCount = kolodaView.currentCardIndex + 1
-        let firstCount = 1
         
-        if(recipeDataArray.isEmpty){
-            cardCountLabel.text = String(firstCount) + "/" + String(recipeCardCount)
+        if(recipeDataArray.count != recipeCardCount){
+            cardCountLabel.text = "Error"
         }
         else if(currentCount <= recipeCardCount) {
             cardCountLabel.text = String(currentCount) + "/" + String(recipeCardCount)
@@ -150,7 +149,7 @@ class RecipeCardViewController: UIViewController {
         let rakutenRecipeApiClient = RakutenRecipeApiClient()
         let fetchCount: Int = 2
         var beforeSmallCategoryNumber: Int = -1
-        let waitTime: Float = 1.2
+        let waitTime: Float = 1.5
         let lastCount: Int = fetchCount - 1
         
         guard let categoryType = self.navigationItem.title else { return }
@@ -175,7 +174,13 @@ class RecipeCardViewController: UIViewController {
                 if(currentCount == lastCount){
                     DispatchQueue.main.async {
                         self.stopIndicator(activityIndicatorView: self.activityIndicator)
+                        
+                        if (self.recipeDataArray.count != self.recipeCardCount) {
+                            self.recipeDataArray = []
+                        }
                         self.kolodaView.resetCurrentCardIndex()
+                        self.updateCardCountLabel()
+                        self.updateUndoButton()
                         self.updateFavotiteButton()
                     }
                 }
