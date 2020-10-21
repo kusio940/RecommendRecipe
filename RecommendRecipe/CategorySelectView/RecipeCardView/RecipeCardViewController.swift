@@ -115,7 +115,7 @@ class RecipeCardViewController: UIViewController {
         
     func updateUndoButton() {
         let currentIndex = kolodaView.currentCardIndex
-        let firstIndex:Int = .zero
+        let firstIndex: Int = .zero
         
         if (currentIndex == firstIndex) {
             undoButton.tintColor = UIColor.gray
@@ -136,7 +136,7 @@ class RecipeCardViewController: UIViewController {
     func updateCardCountLabel() {
         let currentCount = kolodaView.currentCardIndex + 1
         
-        if(recipeDataArray.count != recipeCardCount){
+        if(recipeDataArray.count != recipeCardCount) {
             cardCountLabel.text = "Error"
         }
         else if(currentCount <= recipeCardCount) {

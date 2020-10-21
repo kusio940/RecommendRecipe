@@ -32,11 +32,7 @@ class RakutenRecipeApiClient{
                             let recipeDescription = recipeData["recipeDescription"].string
                             let categoryType = categoryType
                             
-                            var recipeIdString = String(recipeId ?? -1)
-                            let errorRecipeId = "-1"
-                            if(recipeIdString == errorRecipeId) {
-                                recipeIdString = ""
-                            }
+                            let recipeIdString = recipeId == nil ? "" : String(recipeId!)
                             
                             responseArray.append(RecipeData(recipeId: recipeIdString,
                                                             recipeTitle: recipeTitle ?? "",
