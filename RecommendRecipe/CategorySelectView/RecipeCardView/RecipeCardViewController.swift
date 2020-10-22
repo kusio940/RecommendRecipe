@@ -35,7 +35,11 @@ class RecipeCardViewController: UIViewController {
         
         updateRecipeCard()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        view.isUserInteractionEnabled = true
+    }
+
     func setNavigationItem() {
         if let title = navigationTitle
         {
@@ -46,11 +50,6 @@ class RecipeCardViewController: UIViewController {
         navigationItem.rightBarButtonItem = reloadBarButton
     }
     
-    @objc func reloadCard() {
-        self.recipeDataArray = []
-        updateRecipeCard()
-    }
-
     func setKolodaView() {
         let widthRatio: CGFloat = 1.2
         let heightRatio: CGFloat = 1.8
@@ -74,6 +73,7 @@ class RecipeCardViewController: UIViewController {
         addFavoriteButton.addTarget(self, action: #selector(addFavorite), for: .touchUpInside)
     }
     
+    
     func updateFavotiteButton() {
         if (recipeDataArray.isEmpty) { return }
         
@@ -82,35 +82,6 @@ class RecipeCardViewController: UIViewController {
         
         let isExistRecipeId = RealmManager.shared.isExistRecipeId(realmObject: Favorite.self, recipeId: currentRecipeId)
         addFavoriteButton.tintColor = isExistRecipeId ? .systemYellow : .gray
-    }
-    
-    @objc func addFavorite() {
-        if (recipeDataArray.isEmpty) { return }
-        
-        let currentIndex = kolodaView.currentCardIndex
-        let currentRecipeData = recipeDataArray[currentIndex]
-        guard let categoryType = navigationItem.title else { return }
-        
-        let isExistRecipeId = RealmManager.shared.isExistRecipeId(realmObject: Favorite.self, recipeId: currentRecipeData.recipeId)
-        if(isExistRecipeId)
-        {
-            let favorite = RealmManager.shared.getObject(type: Favorite.self).filter("recipeId = %@", currentRecipeData.recipeId).first!
-            RealmManager.shared.deleteData(object: favorite)
-        }
-        else
-        {
-            let favorite = Favorite()
-            
-            favorite.recipeId = currentRecipeData.recipeId
-            favorite.recipeTitle = currentRecipeData.recipeTitle
-            favorite.recipeImageUrl = currentRecipeData.recipeImageUrl
-            favorite.recipeUrl = currentRecipeData.recipeUrl
-            favorite.categoryType = categoryType
-            favorite.time = Date().getCurrentTime()
-            
-            RealmManager.shared.addDbData(object: favorite)
-        }
-        updateFavotiteButton()
     }
         
     func updateUndoButton() {
@@ -126,12 +97,7 @@ class RecipeCardViewController: UIViewController {
         }
     }
     
-    @objc func undoCard(){
-        kolodaView.revertAction()
-        updateCardCountLabel()
-        updateUndoButton()
-        updateFavotiteButton()
-    }
+
     
     func updateCardCountLabel() {
         let currentCount = kolodaView.currentCardIndex + 1
@@ -206,7 +172,72 @@ class RecipeCardViewController: UIViewController {
         
         return resultNumber
     }
-
+    
+    @objc func addFavorite() {
+        if (recipeDataArray.isEmpty) { return }
+        
+        let currentIndex = kolodaView.currentCardIndex
+        let currentRecipeData = recipeDataArray[currentIndex]
+        guard let categoryType = navigationItem.title else { return }
+        
+        let isExistRecipeId = RealmManager.shared.isExistRecipeId(realmObject: Favorite.self, recipeId: currentRecipeData.recipeId)
+        if(isExistRecipeId)
+        {
+            let favorite = RealmManager.shared.getObject(type: Favorite.self).filter("recipeId = %@", currentRecipeData.recipeId).first!
+            RealmManager.shared.deleteData(object: favorite)
+        }
+        else
+        {
+            let favorite = Favorite()
+            
+            favorite.recipeId = currentRecipeData.recipeId
+            favorite.recipeTitle = currentRecipeData.recipeTitle
+            favorite.recipeImageUrl = currentRecipeData.recipeImageUrl
+            favorite.recipeUrl = currentRecipeData.recipeUrl
+            favorite.categoryType = categoryType
+            favorite.time = Date().getCurrentTime()
+            
+            RealmManager.shared.addDbData(object: favorite)
+        }
+        updateFavotiteButton()
+    }
+    
+    func addHistory() {
+        if (recipeDataArray.isEmpty) { return }
+        
+        let historyLimit = 100
+        let historyData = RealmManager.shared.getObject(type: History.self).sorted(byKeyPath: "time", ascending: false)
+        let oldestHistory = historyData.last!
+        
+        if (historyData.count > historyLimit) {
+            RealmManager.shared.deleteData(object: oldestHistory)
+        }
+        
+        let currentIndex = kolodaView.currentCardIndex
+        let currentRecipeData = recipeDataArray[currentIndex]
+        let history = History()
+        
+        history.recipeId = currentRecipeData.recipeId
+        history.recipeTitle = currentRecipeData.recipeTitle
+        history.recipeImageUrl = currentRecipeData.recipeImageUrl
+        history.recipeUrl = currentRecipeData.recipeUrl
+        history.time = Date().getCurrentTime()
+        
+        RealmManager.shared.addDbData(object: history)
+    }
+    
+    @objc func reloadCard() {
+        self.recipeDataArray = []
+        updateRecipeCard()
+    }
+    
+    @objc func undoCard() {
+        kolodaView.revertAction()
+        updateCardCountLabel()
+        updateUndoButton()
+        updateFavotiteButton()
+    }
+    
 }
 
 // MARK: KolodaViewDataSource
@@ -362,5 +393,16 @@ extension RecipeCardViewController: KolodaViewDelegate {
 
     //カードタップ時のイベント
     func koloda(_ koloda: KolodaView, didSelectCardAt index: Int) {
+        //DB保存
+        addHistory()
+        
+        //画面遷移
+        view.isUserInteractionEnabled = false
+        let nextViewController = UIStoryboard(name: "RecipeWebView", bundle: nil).instantiateViewController(withIdentifier: "RecipeWebView") as! RecipeWebViewController
+
+        let recipeUrl = recipeDataArray[index].recipeUrl
+
+        nextViewController.urlString = recipeUrl
+        navigationController?.pushViewController(nextViewController, animated: true)
     }
 }
