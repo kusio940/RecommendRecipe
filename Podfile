@@ -9,5 +9,6 @@ target 'RecommendRecipe' do
   pod 'R.swift'
   pod 'Koloda'
   pod 'SwiftyJSON'
+  pod 'RealmSwift'
 
 end

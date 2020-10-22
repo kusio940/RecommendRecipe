@@ -25,6 +25,9 @@
 		4C6F90FC2526249300DD2F76 /* RakutenRecipeApi.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C6F90FB2526249300DD2F76 /* RakutenRecipeApi.strings */; };
 		4C6F90FF2527670100DD2F76 /* RecipeCardViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F90FE2527670100DD2F76 /* RecipeCardViewController+Extension.swift */; };
 		4C6F910A2527727000DD2F76 /* RecipeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F91092527727000DD2F76 /* RecipeData.swift */; };
+		4CC4ACAD253C8EF100A34DF1 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC4ACAC253C8EF100A34DF1 /* RealmManager.swift */; };
+		4CC4ACB0253C8EFE00A34DF1 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC4ACAF253C8EFE00A34DF1 /* Favorite.swift */; };
+		4CC4ACB3253DABEE00A34DF1 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC4ACB2253DABEE00A34DF1 /* Date+Extension.swift */; };
 		4CECFCF924F2B157002A60B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CECFCF824F2B157002A60B6 /* AppDelegate.swift */; };
 		4CECFCFB24F2B157002A60B6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CECFCFA24F2B157002A60B6 /* SceneDelegate.swift */; };
 		4CECFCFD24F2B157002A60B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CECFCFC24F2B157002A60B6 /* ViewController.swift */; };
@@ -53,6 +56,9 @@
 		4C6F90FB2526249300DD2F76 /* RakutenRecipeApi.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = RakutenRecipeApi.strings; sourceTree = "<group>"; };
 		4C6F90FE2527670100DD2F76 /* RecipeCardViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecipeCardViewController+Extension.swift"; sourceTree = "<group>"; };
 		4C6F91092527727000DD2F76 /* RecipeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeData.swift; sourceTree = "<group>"; };
+		4CC4ACAC253C8EF100A34DF1 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		4CC4ACAF253C8EFE00A34DF1 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
+		4CC4ACB2253DABEE00A34DF1 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		4CECFCF524F2B157002A60B6 /* RecommendRecipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecommendRecipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CECFCF824F2B157002A60B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4CECFCFA24F2B157002A60B6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +105,7 @@
 				4C2BB17C2513C3B500789E51 /* UIColor+Extension.swift */,
 				4C2BB17E2513C3D300789E51 /* UIViewController+Extension.swift */,
 				4C07663C25360B78008EA5F2 /* UIImageView+Extension.swift */,
+				4CC4ACB2253DABEE00A34DF1 /* Date+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -106,6 +113,7 @@
 		4C3E776B24F6AC2400F65255 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4CC4ACA4253C8EB600A34DF1 /* Realm */,
 				4C6F90F825261D7600DD2F76 /* RakutenRecipeApiClient.swift */,
 				4C6F91092527727000DD2F76 /* RecipeData.swift */,
 			);
@@ -166,6 +174,23 @@
 				4C3E777124F6AF1100F65255 /* FavoriteCollectionView.storyboard */,
 			);
 			path = FavoriteView;
+			sourceTree = "<group>";
+		};
+		4CC4ACA4253C8EB600A34DF1 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				4CC4ACA9253C8ED700A34DF1 /* RealmObject */,
+				4CC4ACAC253C8EF100A34DF1 /* RealmManager.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		4CC4ACA9253C8ED700A34DF1 /* RealmObject */ = {
+			isa = PBXGroup;
+			children = (
+				4CC4ACAF253C8EFE00A34DF1 /* Favorite.swift */,
+			);
+			path = RealmObject;
 			sourceTree = "<group>";
 		};
 		4CECFCEC24F2B157002A60B6 = {
@@ -350,9 +375,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CC4ACAD253C8EF100A34DF1 /* RealmManager.swift in Sources */,
+				4CC4ACB0253C8EFE00A34DF1 /* Favorite.swift in Sources */,
 				4C2BB17F2513C3D300789E51 /* UIViewController+Extension.swift in Sources */,
 				4C2BB17D2513C3B500789E51 /* UIColor+Extension.swift in Sources */,
 				4C6F90F925261D7600DD2F76 /* RakutenRecipeApiClient.swift in Sources */,
+				4CC4ACB3253DABEE00A34DF1 /* Date+Extension.swift in Sources */,
 				4CECFCFD24F2B157002A60B6 /* ViewController.swift in Sources */,
 				4CECFCF924F2B157002A60B6 /* AppDelegate.swift in Sources */,
 				4C3E777824F7DB6600F65255 /* CategoryCollectionViewController.swift in Sources */,
