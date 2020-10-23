@@ -30,6 +30,7 @@ class RecipeCardViewController: UIViewController {
         
         setNavigationItem()
         setKolodaView()
+        setCardCountLabelColor()
         setBackgroundColor()
         setButtonTarget()
         
@@ -41,8 +42,7 @@ class RecipeCardViewController: UIViewController {
     }
 
     func setNavigationItem() {
-        if let title = navigationTitle
-        {
+        if let title = navigationTitle {
             navigationItem.title = title
         }
         
@@ -64,6 +64,10 @@ class RecipeCardViewController: UIViewController {
         kolodaView.delegate = self
     }
     
+    func setCardCountLabelColor() {
+        cardCountLabel.textColor = .black
+    }
+    
     func setBackgroundColor() {
         view.backgroundColor = UIColor(rgb: UIColor.baseColor)
     }
@@ -73,9 +77,8 @@ class RecipeCardViewController: UIViewController {
         addFavoriteButton.addTarget(self, action: #selector(addFavorite), for: .touchUpInside)
     }
     
-    
     func updateFavotiteButton() {
-        if (recipeDataArray.isEmpty) { return }
+        guard !recipeDataArray.isEmpty else { return }
         
         let currentIndex = kolodaView.currentCardIndex
         let currentRecipeId = recipeDataArray[currentIndex].recipeId
@@ -102,10 +105,10 @@ class RecipeCardViewController: UIViewController {
     func updateCardCountLabel() {
         let currentCount = kolodaView.currentCardIndex + 1
         
-        if(recipeDataArray.count != recipeCardCount) {
+        if (recipeDataArray.count != recipeCardCount) {
             cardCountLabel.text = "Error"
         }
-        else if(currentCount <= recipeCardCount) {
+        else if (currentCount <= recipeCardCount) {
             cardCountLabel.text = String(currentCount) + "/" + String(recipeCardCount)
         }
     }
@@ -127,17 +130,17 @@ class RecipeCardViewController: UIViewController {
             beforeSmallCategoryNumber = smallCategoryNumber
             
             guard let categoryID = RakutenRecipeCategoryId(rawValue: categoryType)?.getCategoryId(smallCategoryNumber: smallCategoryNumber)
-            else{
+            else {
                 stopIndicator(activityIndicatorView: self.activityIndicator)
                 return
             }
             
             rakutenRecipeApiClient.fetchCategoryRanking(categoryID: categoryID, categoryType: categoryType) { (dataArray) in
-                if(!dataArray.isEmpty){
+                if (!dataArray.isEmpty) {
                     self.recipeDataArray.append(contentsOf: dataArray)
                 }
                 
-                if(currentCount == lastCount){
+                if (currentCount == lastCount) {
                     DispatchQueue.main.async {
                         self.stopIndicator(activityIndicatorView: self.activityIndicator)
                         
@@ -152,7 +155,7 @@ class RecipeCardViewController: UIViewController {
                 }
             }
             
-            if(currentCount != lastCount) {
+            if (currentCount != lastCount) {
                 //API連続呼び出しができないので一定時間待つ
                 Thread.sleep(forTimeInterval: TimeInterval(waitTime))
             }
@@ -174,20 +177,18 @@ class RecipeCardViewController: UIViewController {
     }
     
     @objc func addFavorite() {
-        if (recipeDataArray.isEmpty) { return }
+        guard !recipeDataArray.isEmpty else { return }
         
         let currentIndex = kolodaView.currentCardIndex
         let currentRecipeData = recipeDataArray[currentIndex]
         guard let categoryType = navigationItem.title else { return }
         
         let isExistRecipeId = RealmManager.shared.isExistRecipeId(realmObject: Favorite.self, recipeId: currentRecipeData.recipeId)
-        if(isExistRecipeId)
-        {
+        if (isExistRecipeId) {
             let favorite = RealmManager.shared.getObject(type: Favorite.self).filter("recipeId = %@", currentRecipeData.recipeId).first!
             RealmManager.shared.deleteData(object: favorite)
         }
-        else
-        {
+        else {
             let favorite = Favorite()
             
             favorite.recipeId = currentRecipeData.recipeId
@@ -203,16 +204,8 @@ class RecipeCardViewController: UIViewController {
     }
     
     func addHistory() {
-        if (recipeDataArray.isEmpty) { return }
-        
-        let historyLimit = 100
-        let historyData = RealmManager.shared.getObject(type: History.self).sorted(byKeyPath: "time", ascending: false)
-        let oldestHistory = historyData.last!
-        
-        if (historyData.count > historyLimit) {
-            RealmManager.shared.deleteData(object: oldestHistory)
-        }
-        
+        guard !recipeDataArray.isEmpty else { return }
+                
         let currentIndex = kolodaView.currentCardIndex
         let currentRecipeData = recipeDataArray[currentIndex]
         let history = History()
@@ -224,6 +217,17 @@ class RecipeCardViewController: UIViewController {
         history.time = Date().getCurrentTime()
         
         RealmManager.shared.addDbData(object: history)
+    }
+    
+    func limitHistory() {
+        let historyLimit = 100
+        let historyData = RealmManager.shared.getObject(type: History.self).sorted(byKeyPath: "time", ascending: false)
+        guard let oldestHistory = historyData.last else { return }
+        
+        if (historyData.count > historyLimit) {
+            RealmManager.shared.deleteData(object: oldestHistory)
+        }
+        
     }
     
     @objc func reloadCard() {
@@ -294,7 +298,7 @@ extension RecipeCardViewController: KolodaViewDataSource {
                                                         width: parentView.bounds.width,
                                                         height: parentView.bounds.height))
         
-        if(recipeDataArray.count >= recipeCardCount) {
+        if (recipeDataArray.count >= recipeCardCount) {
             recipeImageView.loadImageAsynchronously(url: URL(string: recipeDataArray[index].recipeImageUrl),
                                                     defaultUIImage: nil)
         }
@@ -318,7 +322,7 @@ extension RecipeCardViewController: KolodaViewDataSource {
         recipeTitleLabel.textColor = UIColor.black
         recipeTitleLabel.font = UIFont.boldSystemFont(ofSize: recipeTitleLabelHeight)
         
-        if(recipeDataArray.count >= recipeCardCount) {
+        if (recipeDataArray.count >= recipeCardCount) {
             recipeTitleLabel.text = recipeDataArray[index].recipeTitle
         }
         else {
@@ -343,14 +347,14 @@ extension RecipeCardViewController: KolodaViewDataSource {
         let recipeDescriptionLabelHeight: CGFloat = 20.5
         
         let recipeDescriptionLabel = UILabel(frame: CGRect(x: xAxisMargin,
-                                                                 y: parentView.bounds.height - (parentView.bounds.height / heightRatio) - yAxisMargin,
-                                                                 width: parentView.bounds.width - widthMargin,
-                                                                 height: recipeDescriptionLabelHeight))
+                                                           y: parentView.bounds.height - (parentView.bounds.height / heightRatio) - yAxisMargin,
+                                                           width: parentView.bounds.width - widthMargin,
+                                                           height: recipeDescriptionLabelHeight))
         
         recipeDescriptionLabel.textColor = UIColor.black
         recipeDescriptionLabel.backgroundColor = UIColor.white
         
-        if(recipeDataArray.count >= recipeCardCount) {
+        if (recipeDataArray.count >= recipeCardCount) {
             recipeDescriptionLabel.text = recipeDataArray[index].recipeDescription
         }
         else {
@@ -363,6 +367,8 @@ extension RecipeCardViewController: KolodaViewDataSource {
         
         recipeDescriptionLabel.numberOfLines = 0
         recipeDescriptionLabel.sizeToFit()
+        
+        recipeDescriptionLabel.frame.origin.y = parentView.bounds.height - recipeDescriptionLabel.bounds.height - yAxisMargin
         
         return recipeDescriptionLabel
     }
@@ -395,6 +401,7 @@ extension RecipeCardViewController: KolodaViewDelegate {
     func koloda(_ koloda: KolodaView, didSelectCardAt index: Int) {
         //DB保存
         addHistory()
+        limitHistory()
         
         //画面遷移
         view.isUserInteractionEnabled = false

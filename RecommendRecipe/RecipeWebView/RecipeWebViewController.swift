@@ -20,8 +20,8 @@ class RecipeWebViewController: UIViewController {
 
         tabBarController?.tabBar.isHidden = true
         
-        if let url = NSURL(string: urlString!) {
-            let request = NSURLRequest(url: url as URL)
+        if let url = URL(string: urlString!) {
+            let request = URLRequest(url: url as URL)
             wkWebView.load(request as URLRequest)
         }
     }
