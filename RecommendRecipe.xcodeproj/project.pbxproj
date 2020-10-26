@@ -28,6 +28,9 @@
 		4C6F90FC2526249300DD2F76 /* RakutenRecipeApi.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C6F90FB2526249300DD2F76 /* RakutenRecipeApi.strings */; };
 		4C6F90FF2527670100DD2F76 /* RecipeCardViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F90FE2527670100DD2F76 /* RecipeCardViewController+Extension.swift */; };
 		4C6F910A2527727000DD2F76 /* RecipeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F91092527727000DD2F76 /* RecipeData.swift */; };
+		4C744091254708450064E1AF /* FavoriteCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C744090254708450064E1AF /* FavoriteCollectionViewController.swift */; };
+		4C74409525470BAC0064E1AF /* FavoriteTableView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C74409425470BAC0064E1AF /* FavoriteTableView.storyboard */; };
+		4C74409825470BF60064E1AF /* FavoriteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C74409725470BF60064E1AF /* FavoriteTableViewController.swift */; };
 		4CC4ACAD253C8EF100A34DF1 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC4ACAC253C8EF100A34DF1 /* RealmManager.swift */; };
 		4CC4ACB0253C8EFE00A34DF1 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC4ACAF253C8EFE00A34DF1 /* Favorite.swift */; };
 		4CC4ACB3253DABEE00A34DF1 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC4ACB2253DABEE00A34DF1 /* Date+Extension.swift */; };
@@ -62,6 +65,9 @@
 		4C6F90FB2526249300DD2F76 /* RakutenRecipeApi.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = RakutenRecipeApi.strings; sourceTree = "<group>"; };
 		4C6F90FE2527670100DD2F76 /* RecipeCardViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecipeCardViewController+Extension.swift"; sourceTree = "<group>"; };
 		4C6F91092527727000DD2F76 /* RecipeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeData.swift; sourceTree = "<group>"; };
+		4C744090254708450064E1AF /* FavoriteCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewController.swift; sourceTree = "<group>"; };
+		4C74409425470BAC0064E1AF /* FavoriteTableView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FavoriteTableView.storyboard; sourceTree = "<group>"; };
+		4C74409725470BF60064E1AF /* FavoriteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewController.swift; sourceTree = "<group>"; };
 		4CC4ACAC253C8EF100A34DF1 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		4CC4ACAF253C8EFE00A34DF1 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		4CC4ACB2253DABEE00A34DF1 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
@@ -157,6 +163,15 @@
 			path = RecipeWebView;
 			sourceTree = "<group>";
 		};
+		4C74409325470B520064E1AF /* FavoriteTableView */ = {
+			isa = PBXGroup;
+			children = (
+				4C74409425470BAC0064E1AF /* FavoriteTableView.storyboard */,
+				4C74409725470BF60064E1AF /* FavoriteTableViewController.swift */,
+			);
+			path = FavoriteTableView;
+			sourceTree = "<group>";
+		};
 		4C7E712424F6A98F00F206F0 /* CategorySelectView */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +202,8 @@
 			isa = PBXGroup;
 			children = (
 				4C3E777124F6AF1100F65255 /* FavoriteCollectionView.storyboard */,
+				4C744090254708450064E1AF /* FavoriteCollectionViewController.swift */,
+				4C74409325470B520064E1AF /* FavoriteTableView */,
 			);
 			path = FavoriteView;
 			sourceTree = "<group>";
@@ -314,6 +331,7 @@
 				4CECFD0524F2B158002A60B6 /* LaunchScreen.storyboard in Resources */,
 				4C6F90FC2526249300DD2F76 /* RakutenRecipeApi.strings in Resources */,
 				4CECFD0224F2B158002A60B6 /* Assets.xcassets in Resources */,
+				4C74409525470BAC0064E1AF /* FavoriteTableView.storyboard in Resources */,
 				4CECFD0024F2B157002A60B6 /* Main.storyboard in Resources */,
 				4C3E777224F6AF1100F65255 /* FavoriteCollectionView.storyboard in Resources */,
 				4C3E776E24F6AE2F00F65255 /* CategoryCollectionView.storyboard in Resources */,
@@ -393,6 +411,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C74409825470BF60064E1AF /* FavoriteTableViewController.swift in Sources */,
 				4C6A6E8625407EC1005A339C /* History.swift in Sources */,
 				4CC4ACAD253C8EF100A34DF1 /* RealmManager.swift in Sources */,
 				4CC4ACB0253C8EFE00A34DF1 /* Favorite.swift in Sources */,
@@ -409,6 +428,7 @@
 				4C6F910A2527727000DD2F76 /* RecipeData.swift in Sources */,
 				4C6A6E83254078EF005A339C /* RecipeWebViewController.swift in Sources */,
 				4C3E777D24F7F06F00F65255 /* RecipeCardViewController.swift in Sources */,
+				4C744091254708450064E1AF /* FavoriteCollectionViewController.swift in Sources */,
 				4C3E778024F8019400F65255 /* R.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

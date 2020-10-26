@@ -1,8 +1,8 @@
 //
-//  CategoryCollectionViewController.swift
+//  FavoriteCollectionViewController.swift
 //  RecommendRecipe
 //
-//  Created by 宮永祐介 on 2020/08/27.
+//  Created by 宮永祐介 on 2020/10/26.
 //  Copyright © 2020 Miyanaga. All rights reserved.
 //
 
@@ -10,8 +10,8 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class CategoryCollectionViewController: UICollectionViewController {
-
+class FavoriteCollectionViewController: UICollectionViewController {
+    
     enum CategoryType: Int{
         case meat
         case fish
@@ -61,7 +61,7 @@ class CategoryCollectionViewController: UICollectionViewController {
         guard let collectionView = collectionView else { return }
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
-        navigationItem.title = R.string.titleWord.categoryCollectionView()
+        navigationItem.title = R.string.titleWord.favoriteCollectionView()
         
         let sizeRatio:CGFloat = 0.5
         let cellSizeMergin: CGFloat = 7.5
@@ -100,7 +100,7 @@ class CategoryCollectionViewController: UICollectionViewController {
         return imageView
     }
     
-    func createtLabelBackground(parentView: UIView) -> UIView{
+    func createtLabelBackground(parentView: UIView) -> UIView {
         let yAxisMargin:CGFloat = 35
         let viewHeight:CGFloat = 24
         let alphaValue:CGFloat = 0.7
@@ -115,7 +115,7 @@ class CategoryCollectionViewController: UICollectionViewController {
         return labelBackground
     }
     
-    func createCategoryLabel(parentView: UIView, labelText: String) -> UILabel{
+    func createCategoryLabel(parentView: UIView, labelText: String) -> UILabel {
         let xAxisMargin:CGFloat = 10
         let yAxisMargin:CGFloat = 35
         let labelwidthMargin:CGFloat = 20
@@ -127,9 +127,33 @@ class CategoryCollectionViewController: UICollectionViewController {
                                                   height: labelHeight))
         categoryLabel.font =  UIFont.systemFont(ofSize: 24)
         categoryLabel.text = labelText
-        categoryLabel.textColor = UIColor.black
+        categoryLabel.textColor = .black
         
         return categoryLabel
+    }
+    
+    func createCategoryCountLabel(parentView: UIView, categoryName: String) -> UILabel {
+        let xAxisMargin:CGFloat = 10
+        let yAxisMargin:CGFloat = 37
+        
+        let categoryCountLabel = UILabel(frame: CGRect(x: parentView.frame.width - xAxisMargin,
+                                                       y: parentView.frame.height - yAxisMargin,
+                                                       width: 0,
+                                                       height: 0))
+        
+        categoryCountLabel.font =  UIFont.systemFont(ofSize: 24)
+        categoryCountLabel.text = getCategoryCount(categoryType: categoryName)
+        categoryCountLabel.textColor = .black
+
+        categoryCountLabel.sizeToFit()
+        categoryCountLabel.frame.origin.x = parentView.bounds.width - categoryCountLabel.bounds.width - xAxisMargin
+        
+        return categoryCountLabel
+    }
+    
+    func getCategoryCount(categoryType: String) -> String {
+        let object = RealmManager.shared.getObject(type: Favorite.self).filter("categoryType == %@",categoryType)
+        return String(object.count)
     }
     
     // MARK: UICollectionViewDataSource
@@ -137,7 +161,6 @@ class CategoryCollectionViewController: UICollectionViewController {
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categoryTypeCount
@@ -156,6 +179,7 @@ class CategoryCollectionViewController: UICollectionViewController {
         cell.contentView.addSubview(createCategoryImageView(imageName: categoryName))
         cell.contentView.addSubview(createtLabelBackground(parentView: cell))
         cell.contentView.addSubview(createCategoryLabel(parentView: cell, labelText: categoryName))
+        cell.contentView.addSubview(createCategoryCountLabel(parentView: cell, categoryName: categoryName))
         
         return cell
     }
@@ -165,10 +189,10 @@ class CategoryCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         collectionView.isUserInteractionEnabled = false
-        let nextViewController = UIStoryboard(name: "RecipeCardView", bundle: nil).instantiateViewController(withIdentifier: "RecipeCardView") as! RecipeCardViewController
+        let nextViewController = UIStoryboard(name: "FavoriteTableView", bundle: nil).instantiateViewController(withIdentifier: "FavoriteTableView") as! FavoriteTableViewController
         
         let optionalCategoryName = CategoryType(rawValue: indexPath.row)?.name
-        
+
         guard let categoryName = optionalCategoryName else { return }
         nextViewController.navigationTitle = categoryName
         navigationController?.pushViewController(nextViewController, animated: true)

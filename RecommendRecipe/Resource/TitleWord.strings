@@ -6,7 +6,7 @@
   Copyright © 2020 Miyanaga. All rights reserved.
 */
 
-"CategoryCollectionViewController" = "カテゴリ選択";
+"CategoryCollectionView" = "カテゴリ選択";
 "FavoriteCollectionView" = "お気に入り";
 "HistoryView" = "履歴";
 "SettingView" = "設定";
