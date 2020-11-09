@@ -7,86 +7,122 @@
 //
 
 import UIKit
+import RealmSwift
+
+private let reuseIdentifier = "favoriteCell"
 
 class FavoriteTableViewController: UITableViewController {
 
     var navigationTitle: String?
+    var favoriteData: Array<Favorite> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        if let title = navigationTitle {
+            setNavigationItem(title: title)
+        }
+        setBackgroundColor()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        favoriteData = []
+        if let categoryType = navigationTitle {
+            setFavoriteData(categoryType: categoryType)
+        }
+        tableView.reloadData()
+        view.isUserInteractionEnabled = true
+    }
+    
+    func setNavigationItem(title: String) {
+        navigationItem.title = title
+    }
+    
+    func setBackgroundColor() {
+        view.backgroundColor = UIColor(rgb: UIColor.baseColor)
     }
 
+    func setFavoriteData(categoryType: String) {
+        let object = RealmManager.shared.getObject(type: Favorite.self).filter("categoryType == %@",categoryType).sorted(byKeyPath: "time", ascending: false)
+        
+        for i in 0..<object.count {
+            if let data = object[i] as? Favorite {
+                favoriteData.append(data)
+            }
+        }
+    }
+    
+    func setRecipeImage(cell: UITableViewCell, index: Int) {
+        let recipeImageTag = 1
+        let recipeImageView = cell.viewWithTag(recipeImageTag) as! UIImageView
+        recipeImageView.loadImageAsynchronously(url: URL(string: favoriteData[index].recipeImageUrl ),
+                                                defaultUIImage: nil)
+    }
+    
+    func setRecipeTitle(cell: UITableViewCell, index: Int) {
+        let recipeTitleLabelTag = 2
+        let recipeTitleLabel = cell.viewWithTag(recipeTitleLabelTag) as! UILabel
+        recipeTitleLabel.text = favoriteData[index].recipeTitle
+    }
+    
+    func addHistory(index: Int) {
+        guard !favoriteData.isEmpty else { return }
+                
+        let currentRecipeData = favoriteData[index]
+        let history = History()
+        
+        history.recipeId = currentRecipeData.recipeId
+        history.recipeTitle = currentRecipeData.recipeTitle
+        history.recipeImageUrl = currentRecipeData.recipeImageUrl
+        history.recipeUrl = currentRecipeData.recipeUrl
+        history.time = Date().getCurrentTime()
+        
+        RealmManager.shared.addDbData(object: history)
+    }
+    
+    func limitHistory() {
+        let historyLimit = 100
+        let historyData = RealmManager.shared.getObject(type: History.self).sorted(byKeyPath: "time", ascending: false)
+        guard let oldestHistory = historyData.last else { return }
+        
+        if (historyData.count > historyLimit) {
+            RealmManager.shared.deleteData(object: oldestHistory)
+        }
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return favoriteData.count
     }
-
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+        
+        setRecipeImage(cell: cell, index: indexPath.row)
+        setRecipeTitle(cell: cell, index: indexPath.row)
+        
         return cell
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //DB保存
+        addHistory(index: indexPath.row)
+        limitHistory()
+        
+        //画面遷移
+        view.isUserInteractionEnabled = false
+        let nextViewController = UIStoryboard(name: "RecipeWebView", bundle: nil).instantiateViewController(withIdentifier: "RecipeWebView") as! RecipeWebViewController
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+        let recipeUrl = favoriteData[indexPath.row].recipeUrl
+
+        nextViewController.urlString = recipeUrl
+        navigationController?.pushViewController(nextViewController, animated: true)
     }
-    */
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

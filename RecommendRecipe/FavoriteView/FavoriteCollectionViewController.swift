@@ -74,6 +74,7 @@ class FavoriteCollectionViewController: UICollectionViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         collectionView.isUserInteractionEnabled = true
+        collectionView.reloadData()
     }
     
     func setCellLayout() {

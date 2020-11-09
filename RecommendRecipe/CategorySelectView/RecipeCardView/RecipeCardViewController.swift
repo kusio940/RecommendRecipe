@@ -70,6 +70,8 @@ class RecipeCardViewController: UIViewController {
     
     func setBackgroundColor() {
         view.backgroundColor = UIColor(rgb: UIColor.baseColor)
+        undoButton.tintColor = UIColor.gray
+        addFavoriteButton.tintColor = UIColor.gray
     }
     
     func setButtonTarget() {
@@ -99,8 +101,6 @@ class RecipeCardViewController: UIViewController {
             undoButton.isEnabled = true
         }
     }
-    
-
     
     func updateCardCountLabel() {
         let currentCount = kolodaView.currentCardIndex + 1
