@@ -18,34 +18,36 @@ class FavoriteTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setNavigationItem()
+
+        if let title = navigationTitle {
+            setNavigationItem(title: title)
+        }
         setBackgroundColor()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         favoriteData = []
-        getFavoriteData()
+        if let categoryType = navigationTitle {
+            setFavoriteData(categoryType: categoryType)
+        }
         tableView.reloadData()
         view.isUserInteractionEnabled = true
     }
     
-    func setNavigationItem() {
-        if let title = navigationTitle {
-            navigationItem.title = title
-        }
+    func setNavigationItem(title: String) {
+        navigationItem.title = title
     }
     
     func setBackgroundColor() {
         view.backgroundColor = UIColor(rgb: UIColor.baseColor)
     }
 
-    func getFavoriteData() {
-        if let title = navigationTitle {
-            let object = RealmManager.shared.getObject(type: Favorite.self).filter("categoryType == %@",title).sorted(byKeyPath: "time", ascending: false)
-            for i in 0..<object.count{
-                favoriteData.append(object[i] as! Favorite)
+    func setFavoriteData(categoryType: String) {
+        let object = RealmManager.shared.getObject(type: Favorite.self).filter("categoryType == %@",categoryType).sorted(byKeyPath: "time", ascending: false)
+        
+        for i in 0..<object.count {
+            if let data = object[i] as? Favorite {
+                favoriteData.append(data)
             }
         }
     }
